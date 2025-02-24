@@ -1,33 +1,25 @@
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 import loginImage from "../../assets/money3.jpg";
 import login1 from "../../assets/money.png";
 import MSForm from "../../components/Form/MSForm";
-
 import MSInput from "../../components/Form/MSInput";
-import { useSignupApiMutation } from "../../redux/Features/Auth/authApi";
-import { useNavigate } from "react-router-dom";
 import MSSelect from "../../components/Form/MSSelect";
+import { useSignupApiMutation } from "../../redux/Features/Auth/authApi";
 
 const Registration = () => {
-  const nevigate = useNavigate();
-  // create user
+  const navigate = useNavigate();
+  // create user mutation
   const [createUser] = useSignupApiMutation();
-
-  // console.log(imagePreview);
-  // handle login
+  // handle signup
   const handleSignUp = async (fieldsValue) => {
     const toastId = toast.loading("Loading..");
     try {
       const data = fieldsValue;
-
-      console.log(data);
-
-      // const res = null;
       const res = await createUser(data);
-      // console.log(res?.error?.data?.message);
       if (res?.data) {
         toast.success("registration success", { id: toastId, duration: 3000 });
-        nevigate("/login");
+        navigate("/login");
       } else {
         toast.error(res?.error?.data?.message, { id: toastId, duration: 3000 });
       }
@@ -57,7 +49,6 @@ const Registration = () => {
           </div>
           <MSForm onSubmit={handleSignUp}>
             <div className="text-left space-y-2">
-              {/* <MSInput required={true} name="name" type="text" label="Name" /> */}
               <MSInput
                 label="Name"
                 name="name"
@@ -101,11 +92,6 @@ const Registration = () => {
                 type="text"
                 variant="bordered"
               />
-
-              {/* { */}
-              {/* // isLoading?
-                // <Button isLoading className="w-full" color="primary" />
-                // : */}
               <button
                 className="w-full border bg-sky-600 rounded-xl py-[6px] text-white font-semibold hover:bg-sky-700
                 "
@@ -113,7 +99,6 @@ const Registration = () => {
               >
                 Registration
               </button>
-              {/* } */}
             </div>
           </MSForm>
           <p className="-mt-4">

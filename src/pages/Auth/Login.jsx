@@ -1,14 +1,15 @@
 import { useState } from "react";
+import { toast } from "sonner";
+import { jwtDecode } from "jwt-decode";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import loginImage from "../../assets/money3.jpg";
 import login1 from "../../assets/money.png";
 import MSForm from "../../components/Form/MSForm";
 import MSInput from "../../components/Form/MSInput";
-import { toast } from "sonner";
 import { useLoginApiMutation } from "../../redux/Features/Auth/authApi";
-import { useDispatch } from "react-redux";
-import { jwtDecode } from "jwt-decode";
 import { authInfo } from "../../redux/Features/Auth/authSlice";
+
 const Login = () => {
   const navigate = useNavigate();
   const [login] = useLoginApiMutation();
@@ -32,7 +33,6 @@ const Login = () => {
     const toastId = toast.loading("Loading..");
     try {
       const res = await login(data);
-      // console.log(res);
       if (res?.data) {
         // set and decode data
         const token = res?.data?.data;
@@ -41,7 +41,6 @@ const Login = () => {
         dispatch(authInfo({ data: userInfo, token: token }));
 
         toast.success("login success", { id: toastId, duration: 3000 });
-        // console.log("--->",userInfo);
         if (userInfo?.role == "USER") {
           navigate("/");
         } else if (userInfo?.role == "ADMIN") {
@@ -73,7 +72,7 @@ const Login = () => {
         <div className="text-center mx-auto w-full lg:w-[80%] p-10">
           <div className="space-y-1 ">
             <h1 className="text-sky-600 text-3xl lg:text-5xl font-bold ">
-              Wellcome
+              WellCome
             </h1>
 
             <div className="flex gap-2 justify-center">
