@@ -24,6 +24,13 @@ export const authApi = baseApi.injectEndpoints({
       }),
       providesTags:["user"]
     }),
+    getSingleUser: builder.query({
+      query: (id) => ({
+        url: `/auth/getSingleUser/${id}`,
+        method: "GET",
+      }),
+      providesTags:["user"]
+    }),
     updateUser: builder.mutation({
       query: (data) => ({
         url: "/auth/updateUser",
@@ -35,4 +42,4 @@ export const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useSignupApiMutation ,useLoginApiMutation ,useGetUserQuery,useUpdateUserMutation} = authApi;
+export const { useSignupApiMutation ,useLoginApiMutation ,useGetUserQuery,useGetSingleUserQuery,useUpdateUserMutation} = authApi;

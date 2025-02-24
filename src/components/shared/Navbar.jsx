@@ -26,12 +26,12 @@ const Navbar = () => {
   // Navigation items
   const navItems = (
     <>
-      <li>
+      {/* <li>
         <a href="/">Lessons</a>
       </li>
       <li>
         <a href="/tutorials">Tutorials</a>
-      </li>
+      </li> */}
     </>
   );
 
@@ -66,16 +66,16 @@ const Navbar = () => {
                     href="/"
                     className="font-bold text-2xl cursor-pointer hover:text-blue-600 "
                   >
-                    日本語 Learn
+                    Money
                   </a>
                 </div>
                 <ul className="space-y-2 text-[16px] font-semibold text-center">
-                  <li className="bg-slate-200 hover:bg-blue-600 hover:text-white py-1 px-1 rounded">
+                  {/* <li className="bg-slate-200 hover:bg-blue-600 hover:text-white py-1 px-1 rounded">
                     <a href="/">Lessons</a>
                   </li>
                   <li className="bg-slate-200 hover:bg-blue-600 hover:text-white py-1 px-1 rounded">
                     <a href="/tutorials">Tutorials</a>
-                  </li>
+                  </li> */}
                   <li className="bg-blue-600 hover:bg-blue-700 py-1 px-1 rounded text-center text-white cursor-pointer"  onClick={() => handleLogOut()}>
                     Log Out
                   </li>
@@ -85,7 +85,7 @@ const Navbar = () => {
           </div>
           {/* Brand Name */}
           <a href="/" className="btn btn-ghost text-xl">
-            日本語 Learn
+            money Learn
           </a>
         </div>
 

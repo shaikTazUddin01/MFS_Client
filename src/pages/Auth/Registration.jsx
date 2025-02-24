@@ -9,6 +9,7 @@ import { useSignupApiMutation } from "../../redux/Features/Auth/authApi";
 
 const Registration = () => {
   const navigate = useNavigate();
+  
   // create user mutation
   const [createUser] = useSignupApiMutation();
   // handle signup

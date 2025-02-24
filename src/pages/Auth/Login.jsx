@@ -41,9 +41,9 @@ const Login = () => {
         dispatch(authInfo({ data: userInfo, token: token }));
 
         toast.success("login success", { id: toastId, duration: 3000 });
-        if (userInfo?.role == "USER") {
-          navigate("/");
-        } else if (userInfo?.role == "ADMIN") {
+        if (userInfo?.role == "User") {
+          navigate("/user");
+        } else if (userInfo?.role == "Admin") {
           navigate("/admin");
         } else {
           navigate("/login");

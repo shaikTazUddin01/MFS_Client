@@ -7,10 +7,9 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 md:flex  md:justify-between gap-8">
         
         <div className="md:w-[35%]">
-          <h2 className="text-3xl font-extrabold text-blue-500">日本語 Learn</h2>
+          <h2 className="text-3xl font-extrabold text-blue-500">Mobile Financial Service </h2>
           <p className="text-gray-400 mt-4 leading-relaxed">
-            Expand your Japanese vocabulary with interactive lessons and
-            tutorials. Learn at your own pace and master the language today!
+          Mobile Financial Service
           </p>
         </div>
 
@@ -97,7 +96,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="mt-8 border-t border-gray-700 pt-4 text-center text-gray-500">
-        © {new Date().getFullYear()} 日本語 Learn. All rights reserved.
+        © {new Date().getFullYear()} Money . All rights reserved.
       </div>
     </footer>
   );
