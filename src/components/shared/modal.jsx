@@ -11,7 +11,7 @@ const MyModal = ({
 }) => {
   return (
     <AntdModal
-      title={title}
+      title={title? title : null}
       open={visible} 
       onOk={onOk}
       onCancel={onCancel}
