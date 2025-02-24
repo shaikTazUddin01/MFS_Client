@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useGetSingleUserQuery } from "../../../redux/Features/Auth/authApi";
-import MyModal from "../../../components/shared/modal"; 
-import MSForm from "../../../components/Form/MSForm";
-import MSInput from "../../../components/Form/MSInput";
 import { toast } from "sonner";
+import SendMoney from "../../../components/User/SendMoney";
+import BalanceInquiry from "../../../components/User/BalanceInquiry";
 
 const Home = () => {
   const currentUser = useSelector((state) => state?.auth?.user);
@@ -16,9 +15,6 @@ const Home = () => {
   const [balanceVisible, setBalanceVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState(null);
-  const [selectedBalance, setSelectedBalance] = useState(0);
-
-  console.log(selectedBalance);
 
   const toggleBalanceVisibility = () => {
     setBalanceVisible((prev) => !prev);
@@ -123,89 +119,23 @@ const Home = () => {
 
       {/* for balance enquire */}
       {modalContent?.title === "Balance Inquiry" && (
-        <MyModal
-          title={modalContent?.title}
-          visible={modalVisible}
-          onOk={handleOk}
-          onCancel={handleCancel}
-          footer={null}
-        >
-          {modalContent?.balance !== undefined && (
-            <div className="flex items-center justify-between min-h-[100px]">
-              <p className="text-lg font-semibold">
-                Your Balance:{" "}
-                {balanceVisible ? (
-                  <span className="text-green-600">{modalContent.balance}</span>
-                ) : (
-                  <span className="blur-sm">******</span>
-                )}
-              </p>
-              <button
-                onClick={modalContent.action}
-                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all"
-              >
-                {balanceVisible ? "Hide" : "Show"}
-              </button>
-            </div>
-          )}
-          {modalContent?.content && (
-            <p className="text-gray-700">
-              {modalContent.content - selectedBalance}
-            </p>
-          )}
-        </MyModal>
+        <BalanceInquiry
+          balanceVisible={balanceVisible}
+          handleCancel={handleCancel}
+          handleOk={handleOk}
+          modalContent={modalContent}
+          modalVisible={modalVisible}
+        />
       )}
       {/* for sent money */}
       {modalContent?.title === "Send Money" && (
-        <MyModal
-          title={modalContent?.title}
-          visible={modalVisible}
-          onOk={handleOk}
-          onCancel={handleCancel}
-          footer={null}
-        >
-          <MSForm onSubmit={handleSendMoney}>
-            <div className="space-y-2 text-left">
-              <h1 className="text-center text-lg font-medium">
-                Avaliable balance :{" "}
-                <span
-                  className={`${
-                    modalContent?.balance > selectedBalance
-                      ? "text-green-600"
-                      : "text-red-600"
-                  }`}
-                >
-                  {modalContent?.balance - selectedBalance}
-                </span>
-              </h1>
-              <MSInput
-                label="User Phone Number"
-                name="number"
-                required={true}
-                type="number"
-                variant="bordered"
-                placeholder="Enter recipient's phone number"
-              />
-              <MSInput
-                label="Amount (Taka)"
-                name="amount"
-                required={true}
-                type="number"
-                variant="bordered"
-                placeholder="Enter amount"
-                onChange={(e) => setSelectedBalance(e.target.value)}
-              />
-
-              <button
-                className="w-full border bg-sky-600 rounded-xl py-[8px] text-white font-semibold hover:bg-sky-700
-              "
-                type="submit"
-              >
-                Send
-              </button>
-            </div>
-          </MSForm>
-        </MyModal>
+        <SendMoney
+          modalContent={modalContent}
+          modalVisible={modalVisible}
+          handleSendMoney={handleSendMoney}
+          handleCancel={handleCancel}
+          handleOk={handleOk}
+        />
       )}
     </div>
   );
