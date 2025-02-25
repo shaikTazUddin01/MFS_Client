@@ -1,4 +1,4 @@
-import MyModal from "../shared/modal";
+import MyModal from "./modal";
 
 const BalanceInquiry = ({
   modalContent,

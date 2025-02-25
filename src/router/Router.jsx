@@ -3,11 +3,15 @@ import Login from "../pages/Auth/Login";
 import Registration from "../pages/Auth/Registration";
 import ProtectedRouter from "./ProtectedRouter";
 import UserLayout from "../layout/UserLayout";
-import Home from "../pages/Auth/User/Home";
+import AgentProtectedRouter from "../layout/AgentLayout"
+import AgentLayout from "../layout/AgentLayout";
+import AgentHome from "../pages/Agent/AgentHome";
+import Home from "../pages/User/Home";
+
 
 export const router = createBrowserRouter([
   {
-    path: "/user",
+    path: "/",
     element: (
       <ProtectedRouter>
         <UserLayout />
@@ -17,6 +21,20 @@ export const router = createBrowserRouter([
       {
         path: "",
         element: <Home />,
+      },
+    ],
+  },
+  {
+    path: "/agent",
+    element: (
+      <AgentProtectedRouter>
+        <AgentLayout />
+      </AgentProtectedRouter>
+    ),
+    children: [
+      {
+        path: "",
+        element: <AgentHome />,
       },
     ],
   },

@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { useGetSingleUserQuery } from "../../../redux/Features/Auth/authApi";
-import { toast } from "sonner";
-import SendMoney from "../../../components/User/SendMoney";
-import BalanceInquiry from "../../../components/User/BalanceInquiry";
+import { useGetSingleUserQuery } from "../../redux/Features/Auth/authApi";
+import BalanceInquiry from "../../components/shared/BalanceInquiry";
+import RechargeRequest from "../../components/Agent/RechargeRequest";
 
-const Home = () => {
-  const currentUser = useSelector((state) => state?.auth?.user);
+const AgentHome = () => {
+  const currentUser = useSelector((state) => state.auth.user);
 
   const { data: userData, isLoading } = useGetSingleUserQuery(
     currentUser?.userId
@@ -16,9 +15,7 @@ const Home = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState(null);
 
-  const toggleBalanceVisibility = () => {
-    setBalanceVisible((prev) => !prev);
-  };
+  const toggleBalanceVisibility = () => setBalanceVisible((prev) => !prev);
 
   const cardData = [
     {
@@ -28,13 +25,9 @@ const Home = () => {
       action: toggleBalanceVisibility,
     },
     {
-      title: "Send Money",
+      title: "Recharge Request",
       icon: "💸",
       balance: userData?.data?.balance,
-    },
-    {
-      title: "Cash Out",
-      icon: "💰",
     },
   ];
 
@@ -61,46 +54,13 @@ const Home = () => {
     );
   }
 
-  const handleSendMoney = async (fieldsValue) => {
+  const handleRechargeRequest = async (fieldsValue) => {
     console.log(fieldsValue);
-    const { number, amount } = fieldsValue;
-
-    if (amount < 50) {
-      toast.error("Minimum send amount is 50 Taka.", { duration: 3000 });
-      return;
-    }
-    const fee = amount > 100 ? 5 : 0;
-    const totalAmount = amount + fee;
-
-    console.log(
-      "Sending:",
-      amount,
-      "Taka to",
-      number,
-      "Fee:",
-      fee,
-      "Total:",
-      totalAmount
-    );
-
-    // const toastId = toast.loading("Loading..");
-    // try {
-    //   const data = fieldsValue;
-    //   const res = await sendMoney(data);
-    //   if (res?.data) {
-    //     toast.success("Money sent successfully", { id: toastId, duration: 3000 });
-    //     handleOk();
-    //   } else {
-    //     toast.error(res?.error?.data?.message, { id: toastId, duration: 3000 });
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   return (
     <div className="min-h-[90vh] flex justify-center items-center bg-gradient-to-br from-gray-200 to-gray-50">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {cardData.map((item, index) => (
           <div
             key={index}
@@ -117,7 +77,7 @@ const Home = () => {
         ))}
       </div>
 
-      {/* for balance enquire */}
+      {/* Modal Content */}
       {modalContent?.title === "Balance Inquiry" && (
         <BalanceInquiry
           balanceVisible={balanceVisible}
@@ -127,12 +87,12 @@ const Home = () => {
           modalVisible={modalVisible}
         />
       )}
-      {/* for sent money */}
-      {modalContent?.title === "Send Money" && (
-        <SendMoney
+      {/* recharge request */}
+      {modalContent?.title === "Recharge Request" && (
+        <RechargeRequest
           modalContent={modalContent}
           modalVisible={modalVisible}
-          handleSendMoney={handleSendMoney}
+          handleRechargeRequest={handleRechargeRequest}
           handleCancel={handleCancel}
           handleOk={handleOk}
         />
@@ -141,4 +101,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default AgentHome;

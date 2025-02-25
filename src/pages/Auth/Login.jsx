@@ -42,8 +42,11 @@ const Login = () => {
 
         toast.success("login success", { id: toastId, duration: 3000 });
         if (userInfo?.role == "User") {
-          navigate("/user");
-        } else if (userInfo?.role == "Admin") {
+          navigate("/");
+        } else if (userInfo?.role == "Agent") {
+          navigate("/agent");
+        } 
+        else if (userInfo?.role == "Admin") {
           navigate("/admin");
         } else {
           navigate("/login");
