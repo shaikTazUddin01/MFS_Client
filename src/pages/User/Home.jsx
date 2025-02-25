@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { toast } from "sonner";
 import { useSelector } from "react-redux";
 import { useGetSingleUserQuery } from "../../redux/Features/Auth/authApi";
-import { toast } from "sonner";
 import SendMoney from "../../components/User/SendMoney";
 import CashOut from "../../components/User/CashOut";
 import BalanceInquiry from "../../components/shared/BalanceInquiry";

@@ -25,7 +25,7 @@ const Registration = () => {
         toast.error(res?.error?.data?.message, { id: toastId, duration: 3000 });
       }
     } catch (error) {
-      console.log(error);
+      toast.error(error);
     }
   };
 

@@ -77,7 +77,7 @@ const AgentHome = () => {
         ))}
       </div>
 
-      {/* Modal Content */}
+      {/* Balance Inquiry */}
       {modalContent?.title === "Balance Inquiry" && (
         <BalanceInquiry
           balanceVisible={balanceVisible}

@@ -1,25 +1,22 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
+import { FaUserEdit } from "react-icons/fa";
 import { Button, Modal } from "antd";
+import { toast } from "sonner";
 import MSForm from "../../Form/MSForm";
 import MSSelect from "../../Form/MSSelect";
 import { useUpdateUserMutation } from "../../../redux/Features/Auth/authApi";
-import { toast } from "sonner";
-import { FaUserEdit } from "react-icons/fa";
 
 const UpdateUser = ({ userInFo }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateRole] = useUpdateUserMutation();
 
-
-
   const showModal = () => {
     setIsModalOpen(true);
   };
 
-const handleCancel=()=>{
-  setIsModalOpen(false)
-}
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   const handleUpdate = async (data) => {
     const toastId = toast.loading("Loading..");
@@ -43,13 +40,18 @@ const handleCancel=()=>{
 
   return (
     <>
-      <Button color="primary" variant="outlined" onClick={showModal} className="flex items-center gap-1">
-      <span className="text-xl">
-      <FaUserEdit />
-      </span>
+      <Button
+        color="primary"
+        variant="outlined"
+        onClick={showModal}
+        className="flex items-center gap-1"
+      >
+        <span className="text-xl">
+          <FaUserEdit />
+        </span>
         Update
       </Button>
-      <Modal open={isModalOpen}  footer={null} onCancel={handleCancel}>
+      <Modal open={isModalOpen} footer={null} onCancel={handleCancel}>
         <div>
           <h1 className="text-xl font-semibold text-center mt-2 -mb-2">
             Update User Role

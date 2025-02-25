@@ -2,15 +2,13 @@ import React, { useEffect, useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 const MSForm = ({ onSubmit, children, defaultValues }) => {
- 
   const methods = useForm({ defaultValues });
 
   useEffect(() => {
     if (defaultValues) {
-      methods.reset(defaultValues); 
+      methods.reset(defaultValues);
     }
-  }, [defaultValues]); 
-  
+  }, [defaultValues]);
 
   const submit = (data) => {
     onSubmit(data);

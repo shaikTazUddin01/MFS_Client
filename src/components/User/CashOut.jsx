@@ -39,7 +39,7 @@ const CashOut = ({
             {selectedBalance > 0 && (
               <p className="text-lg">
                 Cash Out Amount: {selectedBalance}{" "}
-                {selectedBalance  && (
+                {selectedBalance && (
                   <span className="text-green-600 ml-1">
                     (+ {((selectedBalance * 1.5) / 100).toFixed(2)} tk charged)
                   </span>

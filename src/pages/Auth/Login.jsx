@@ -45,8 +45,7 @@ const Login = () => {
           navigate("/");
         } else if (userInfo?.role == "Agent") {
           navigate("/agent");
-        } 
-        else if (userInfo?.role == "Admin") {
+        } else if (userInfo?.role == "Admin") {
           navigate("/admin");
         } else {
           navigate("/login");
@@ -58,7 +57,7 @@ const Login = () => {
       toast.error(error, { id: toastId, duration: 3000 });
     }
   };
-  
+
   return (
     <div
       className=" min-h-screen w-full lg:p-20 bg-cover flex justify-center items-center"

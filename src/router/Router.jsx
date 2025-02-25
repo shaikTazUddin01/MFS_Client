@@ -3,11 +3,12 @@ import Login from "../pages/Auth/Login";
 import Registration from "../pages/Auth/Registration";
 import ProtectedRouter from "./ProtectedRouter";
 import UserLayout from "../layout/UserLayout";
-import AgentProtectedRouter from "../layout/AgentLayout"
+import AgentProtectedRouter from "../layout/AgentLayout";
 import AgentLayout from "../layout/AgentLayout";
 import AgentHome from "../pages/Agent/AgentHome";
 import Home from "../pages/User/Home";
-
+import AdminProtectedRouter from "./AdminProtectedRouter";
+import AdminLayout from "../layout/AdminLayout";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,20 @@ export const router = createBrowserRouter([
       <AgentProtectedRouter>
         <AgentLayout />
       </AgentProtectedRouter>
+    ),
+    children: [
+      {
+        path: "",
+        element: <AgentHome />,
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    element: (
+      <AdminProtectedRouter>
+        <AdminLayout />
+      </AdminProtectedRouter>
     ),
     children: [
       {

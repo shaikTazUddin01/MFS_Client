@@ -5,17 +5,19 @@ const Footer = () => {
   return (
     <footer className="bg-gray-800 text-white py-8">
       <div className="max-w-7xl mx-auto px-6 md:flex  md:justify-between gap-8">
-        
         <div className="md:w-[35%]">
-          <h2 className="text-3xl font-extrabold text-blue-500">Mobile Financial Service </h2>
+          <h2 className="text-3xl font-extrabold text-blue-500">
+            Mobile Financial Service{" "}
+          </h2>
           <p className="text-gray-400 mt-4 leading-relaxed">
-          Mobile Financial Service
+            Mobile Financial Service
           </p>
         </div>
 
-  
         <div>
-          <h3 className="text-lg font-semibold text-blue-400 pt-8 md:pt-0">Quick Links</h3>
+          <h3 className="text-lg font-semibold text-blue-400 pt-8 md:pt-0">
+            Quick Links
+          </h3>
           <ul className="mt-4 space-y-3">
             <li>
               <a
@@ -52,9 +54,10 @@ const Footer = () => {
           </ul>
         </div>
 
-      
         <div>
-          <h3 className="text-lg font-semibold text-blue-400 pt-8 md:pt-0">Contact Us</h3>
+          <h3 className="text-lg font-semibold text-blue-400 pt-8 md:pt-0">
+            Contact Us
+          </h3>
           <ul className="mt-4 space-y-3">
             <li>
               <a
@@ -69,7 +72,7 @@ const Footer = () => {
                 href="tel:+1234567890"
                 className="text-gray-300 hover:text-blue-400 transition duration-200"
               >
-                +880 1234 56782 
+                +880 1234 56782
               </a>
             </li>
           </ul>
