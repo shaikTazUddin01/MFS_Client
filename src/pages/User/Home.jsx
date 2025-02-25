@@ -5,6 +5,7 @@ import { useGetSingleUserQuery } from "../../redux/Features/Auth/authApi";
 import SendMoney from "../../components/User/SendMoney";
 import CashOut from "../../components/User/CashOut";
 import BalanceInquiry from "../../components/shared/BalanceInquiry";
+import { useNewTransactionMutation } from "../../redux/Features/Transaction/transactionApi";
 
 const Home = () => {
   const currentUser = useSelector((state) => state?.auth?.user);
@@ -20,6 +21,9 @@ const Home = () => {
   const toggleBalanceVisibility = () => {
     setBalanceVisible((prev) => !prev);
   };
+
+  // send money mutation
+  const [sendMoney]=useNewTransactionMutation()
 
   const cardData = [
     {
@@ -64,40 +68,42 @@ const Home = () => {
   }
 
   const handleSendMoney = async (fieldsValue) => {
-    console.log(fieldsValue);
     const { number, amount } = fieldsValue;
 
     if (amount < 50) {
       toast.error("Minimum send amount is 50 Taka.", { duration: 3000 });
       return;
     }
-    const fee = amount > 100 ? 5 : 0;
-    const totalAmount = amount + fee;
 
-    console.log(
-      "Sending:",
-      amount,
-      "Taka to",
-      number,
-      "Fee:",
-      fee,
-      "Total:",
-      totalAmount
-    );
+    if (amount > userData?.data?.balance) {
+      toast.error("you don't have enough balance to send this money.", { duration: 3000 });
+      return;
+    }
+    const fee = Number(amount) > 100 ? 5 : 0;
+    const totalAmount = Number(amount) + fee;
 
-    // const toastId = toast.loading("Loading..");
-    // try {
-    //   const data = fieldsValue;
-    //   const res = await sendMoney(data);
-    //   if (res?.data) {
-    //     toast.success("Money sent successfully", { id: toastId, duration: 3000 });
-    //     handleOk();
-    //   } else {
-    //     toast.error(res?.error?.data?.message, { id: toastId, duration: 3000 });
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    const data = {
+      senderNumber: userData?.data?.number,
+      receiverNumber: Number(number),
+      transactionType: "cashIn",
+      transactionAmount: Number(totalAmount),
+    };
+
+    console.log(data);
+
+    const toastId = toast.loading("sending...");
+    try {
+      
+      const res = await sendMoney(data);
+      if (res?.data) {
+        toast.success("Money sent successfully", { id: toastId, duration: 3000 });
+        handleOk();
+      } else {
+        toast.error(res?.error?.data?.message, { id: toastId, duration: 3000 });
+      }
+    } catch (error) {
+      toast.error(error);
+    }
   };
   // handle cash out
   const handleCashOut = async (fieldsValue) => {

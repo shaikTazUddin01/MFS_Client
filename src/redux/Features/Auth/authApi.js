@@ -1,6 +1,5 @@
 import { baseApi } from "../../Api/baseApi";
 
-
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     signupApi: builder.mutation({
@@ -9,6 +8,7 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags:['user']
     }),
     loginApi: builder.mutation({
       query: (data) => ({
@@ -17,19 +17,25 @@ export const authApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+
     getUser: builder.query({
-      query: () => ({
-        url: "/auth/getUser",
-        method: "GET",
-      }),
-      providesTags:["user"]
+      query: ({ role }) => {
+        
+        const params = new URLSearchParams();
+        if (role) params.append("role", role);
+        return {
+          url: `/auth/getUser?${params.toString()}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["user"],
     }),
     getSingleUser: builder.query({
       query: (id) => ({
         url: `/auth/getSingleUser/${id}`,
         method: "GET",
       }),
-      providesTags:["user"]
+      providesTags: ["user"],
     }),
     updateUser: builder.mutation({
       query: (data) => ({
@@ -37,9 +43,15 @@ export const authApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags:["user"]
+      invalidatesTags: ["user"],
     }),
   }),
 });
 
-export const { useSignupApiMutation ,useLoginApiMutation ,useGetUserQuery,useGetSingleUserQuery,useUpdateUserMutation} = authApi;
+export const {
+  useSignupApiMutation,
+  useLoginApiMutation,
+  useGetUserQuery,
+  useGetSingleUserQuery,
+  useUpdateUserMutation,
+} = authApi;

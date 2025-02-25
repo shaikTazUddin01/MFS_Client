@@ -23,8 +23,8 @@ const Login = () => {
   };
   const DemoAdminInFo = () => {
     setDefaultUserInfo({
-      email: "tihan@gmail.com",
-      password: "123456",
+      email: "admin@gmail.com",
+      password: "admin123",
     });
   };
   // dispatch
