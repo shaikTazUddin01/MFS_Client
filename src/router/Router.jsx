@@ -9,6 +9,9 @@ import AgentHome from "../pages/Agent/AgentHome";
 import Home from "../pages/User/Home";
 import AdminProtectedRouter from "./AdminProtectedRouter";
 import AdminLayout from "../layout/AdminLayout";
+import DashBoard from "../pages/Admin/DashBoard";
+import ManageAgent from "../pages/Admin/ManageAgent";
+import ManageUser from "../pages/Admin/ManageUser";
 
 export const router = createBrowserRouter([
   {
@@ -49,7 +52,15 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <AgentHome />,
+        element: <DashBoard />,
+      },
+      {
+        path: "manageAgent",
+        element: <ManageAgent />,
+      },
+      {
+        path: "manageUser",
+        element: <ManageUser />,
       },
     ],
   },

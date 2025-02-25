@@ -172,7 +172,7 @@ const AdminLayout = () => {
         </Header>
         <Content
           className="bg-cover bg-no-repeat"
-          style={{ backgroundImage: `url(${bg})` }}
+        //   style={{ backgroundImage: `url(${bg})` }}
         >
           <div className="bg-[#2423233f] h-full p-5">
             <Outlet />
