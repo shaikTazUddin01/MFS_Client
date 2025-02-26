@@ -9,7 +9,7 @@ import { IoCloseSharp, IoNotifications } from "react-icons/io5";
 import { HiMenuAlt1 } from "react-icons/hi";
 import { useGetUserTransactionQuery } from "../../redux/Features/Transaction/transactionApi";
 
-const Navbar = () => {
+const AgentNavbar = () => {
   const currentUser = useUser();
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
@@ -59,19 +59,19 @@ const Navbar = () => {
               <IoCloseSharp />
             </button>
             <div className="text-center mb-4">
-              <a href="/" className="font-bold text-2xl hover:text-blue-600">
+              <a href="/agent" className="font-bold text-2xl hover:text-blue-600">
                 FinanceFlow
               </a>
             </div>
             <ul className="space-y-2 text-center font-semibold flex flex-col justify-between h-[80vh]">
-              <div className="">
-                <li>
-                  <a href="/agent">Home</a>
-                </li>
-                <li>
-                  <a href="/agent/allNotification">All Notification</a>
-                </li>
-              </div>
+                <div className="">
+              <li>
+                <a href="/agent">Home</a>
+              </li>
+              <li>
+                <a href="/agent/allNotification">All Notification</a>
+              </li>
+                </div>
               <li
                 className=" bg-blue-600 hover:bg-blue-700 py-1 px-1 rounded cursor-pointer text-white"
                 onClick={handleLogOut}
@@ -80,7 +80,9 @@ const Navbar = () => {
               </li>
             </ul>
           </Drawer>
-          <a href="/" className="ml-3 text-xl font-bold">
+
+          {/* Brand Name */}
+          <a href="/agent" className="ml-3 text-xl font-bold">
             FinanceFlow
           </a>
         </div>
@@ -89,10 +91,10 @@ const Navbar = () => {
         <div className="hidden lg:flex">
           <ul className="menu menu-horizontal px-1 text-[16px]">
             <li>
-              <a href="/">Home</a>
+              <a href="/agent">Home</a>
             </li>
             <li>
-              <a href="/allNotification">All Notification</a>
+              <a href="/agent/allNotification">All Notification</a>
             </li>
           </ul>
         </div>
@@ -185,4 +187,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default AgentNavbar;

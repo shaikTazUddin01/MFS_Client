@@ -18,6 +18,7 @@ import UserTransaction from "../pages/Admin/UserTransaction";
 import VerifyAgent from "../pages/Admin/VerifyAgent";
 import ManageAgent from "../pages/Admin/ManageAgent";
 import AllTransaction from "../pages/Admin/AllTransaction";
+import AllNotification from "../pages/User/AllNotification";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
         path: "",
         element: <Home />,
       },
+      {
+        path: "allNotification",
+        element: <AllNotification />,
+      },
     ],
   },
   {
@@ -45,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: "",
         element: <AgentHome />,
+      },
+      {
+        path: "allNotification",
+        element: <AllNotification />,
       },
     ],
   },

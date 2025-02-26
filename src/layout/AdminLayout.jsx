@@ -64,7 +64,7 @@ const AdminLayout = () => {
     {
       key: "5",
       icon: <PayCircleOutlined />,
-      label: "Agent Recharge Request",
+      label: "Recharge Request",
       path: "/admin/cashInRequest",
     },
     {
@@ -136,7 +136,7 @@ const AdminLayout = () => {
           href="/"
           className="font-bold text-2xl cursor-pointer hover:text-blue-600 text-white flex justify-center items-center pt-4 pb-3"
         >
-          Money
+          FinanceFlow 
         </a>
         {renderMenu()}
       </Sider>
@@ -149,7 +149,7 @@ const AdminLayout = () => {
       >
         <div className="flex justify-between items-center p-4">
           <a href="/" className="font-bold text-2xl cursor-pointer text-white">
-            Money
+          FinanceFlow 
           </a>
           <button
             className="text-white text-2xl"

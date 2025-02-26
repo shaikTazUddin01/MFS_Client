@@ -21,6 +21,12 @@ const Login = () => {
       password: "123456",
     });
   };
+  const DemoAgentInFo = () => {
+    setDefaultUserInfo({
+      email: "admin@gmail.com",
+      password: "admin123",
+    });
+  };
   const DemoAdminInFo = () => {
     setDefaultUserInfo({
       email: "admin@gmail.com",
@@ -63,8 +69,8 @@ const Login = () => {
       className=" min-h-screen w-full lg:p-20 bg-cover flex justify-center items-center"
       style={{ backgroundImage: `url(${loginImage})` }}
     >
-      <div className="bg-white rounded-2xl h-full grid grid-cols-1 lg:grid-cols-2 shadow items-center mx-auto overflow-hidden">
-        <div className="">
+      <div className="bg-white rounded-2xl h-full  grid  grid-cols-1 lg:grid-cols-2 shadow items-center mx-auto overflow-hidden max-w-[1250px]">
+        <div className="h-full">
           <img
             alt="login image"
             className="hidden lg:flex object-cover w-full h-full"
@@ -77,18 +83,24 @@ const Login = () => {
               WellCome
             </h1>
 
-            <div className="flex gap-2 justify-center">
+            <div className="flex gap-2 justify-center pt-1">
               <button
-                className="bg-blue-600 rounded-md px-2 text-white font-semibold"
+                className="bg-blue-600 rounded-md px-2 text-white font-semibold text-sm"
                 onClick={() => DemoUserInFo()}
               >
-                Demo User
+               Test User
               </button>
               <button
-                className="bg-blue-600 rounded-md px-2 text-white font-semibold"
+                className="bg-blue-600 rounded-md px-2 text-white font-semibold text-sm"
+                onClick={() => DemoAgentInFo()}
+              >
+              Test Agent
+              </button>
+              <button
+                className="bg-blue-600 rounded-md px-2 text-white font-semibold text-sm"
                 onClick={() => DemoAdminInFo()}
               >
-                Demo Admin
+                Test Admin
               </button>
             </div>
           </div>

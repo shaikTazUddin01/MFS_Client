@@ -15,11 +15,26 @@ const Registration = () => {
   // handle signup
   const handleSignUp = async (fieldsValue) => {
     const toastId = toast.loading("Loading..");
+  
+    const { name, email, number, password, accountType, nid } = fieldsValue;
+  
+    if (!name || !email || !number || !password || !accountType || !nid) {
+      toast.error("All fields are required", { id: toastId, duration: 3000 });
+      return;
+    }
+  
+    if (!/^\d{5}$/.test(password)) {
+      toast.error("Password must be exactly 5 digits", { id: toastId, duration: 3000 });
+      return;
+    }
+  
+    
+  
     try {
       const data = fieldsValue;
       const res = await createUser(data);
       if (res?.data) {
-        toast.success("registration success", { id: toastId, duration: 3000 });
+        toast.success("Registration success", { id: toastId, duration: 3000 });
         navigate("/login");
       } else {
         toast.error(res?.error?.data?.message, { id: toastId, duration: 3000 });
@@ -28,10 +43,11 @@ const Registration = () => {
       toast.error(error);
     }
   };
+  
 
   return (
     <div
-      className=" min-h-screen w-full lg:p-20 bg-cover flex justify-center items-center"
+      className="  w-full lg:p-20 bg-cover flex justify-center items-center"
       style={{ backgroundImage: `url(${loginImage})` }}
     >
       <div className="bg-white rounded-2xl h-full  grid  grid-cols-1 lg:grid-cols-2 shadow items-center mx-auto overflow-hidden max-w-[1250px]">
@@ -56,6 +72,7 @@ const Registration = () => {
                 required={true}
                 type="text"
                 variant="bordered"
+               
               />
               <MSInput
                 label="Email"

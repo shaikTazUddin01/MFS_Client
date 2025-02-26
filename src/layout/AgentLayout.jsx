@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../components/shared/Navbar";
 import Footer from "../components/shared/Footer";
+import AgentNavbar from "../components/Agent/AgentNavbar";
 
 const AgentLayout = () => {
   return (
     <div className="bg-gradient-to-br from-blue-50 to-white">
-      <Navbar />
+      <AgentNavbar />
       <Outlet />
       <Footer />
     </div>
