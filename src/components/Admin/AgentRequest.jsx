@@ -63,7 +63,7 @@ const AgentRequest = ({ item }) => {
                 name={"status"}
                 label={"agent status"}
                 defaultFieldValue={item?.status}
-                items={[{ name: "Pending" }, { name: "Verified" }]}
+                items={[{ name: "Pending" }, { name: "Verified" },{ name: "Reject" }]}
               />
               <button
                 type="submit"

@@ -15,6 +15,7 @@ import ManageUser from "../pages/Admin/ManageUser";
 import ManageAgentRequest from "../pages/Admin/AgentRequest";
 import CashInRequest from "../pages/Admin/CashInRequest";
 import AddMoneyToAgent from "../pages/Admin/AddMoney";
+import UserTransaction from "../pages/Admin/UserTransaction";
 
 export const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ export const router = createBrowserRouter([
       {
         path: "addMoney",
         element: <AddMoneyToAgent/>,
+      },
+      {
+        path: "transactions/:number",
+        element: <UserTransaction/>,
       },
     ],
   },

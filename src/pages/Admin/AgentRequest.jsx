@@ -12,12 +12,12 @@ const ManageAgentRequest = () => {
     role: "Agent",
     status: "Pending",
   });
-  // Mock data
+  // agent data
   const users = userData?.data?.map((user) => ({
     key: user?._id,
     userName: user?.name,
     userEmail: user?.email,
-    userPhone: user?.number,
+    userPhone: `0${String(user?.number)}`,
     NidNumber: user?.nid,
     status: user?.accountStatus,
     balance: `${user?.balance}৳`,

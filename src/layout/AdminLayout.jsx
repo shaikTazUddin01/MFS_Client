@@ -38,10 +38,10 @@ const AdminLayout = () => {
       path: "/admin",
     },
     {
-      key: "2",
-      icon: <UserOutlined />,
-      label: "Verified Agent",
-      path: "/admin/manageAgent",
+      key: "4",
+      icon: <TaobaoCircleOutlined />,
+      label: "Manage User",
+      path: "/admin/manageUser",
     },
     {
       key: "3",
@@ -50,10 +50,10 @@ const AdminLayout = () => {
       path: "/admin/agentRequest",
     },
     {
-      key: "4",
-      icon: <TaobaoCircleOutlined />,
-      label: "Manage User",
-      path: "/admin/manageUser",
+      key: "2",
+      icon: <UserOutlined />,
+      label: "Verified Agent",
+      path: "/admin/manageAgent",
     },
     {
       key: "5",

@@ -44,9 +44,9 @@ export const transactionApi = baseApi.injectEndpoints({
       },
       providesTags: ["transaction"],
     }),
-    getSingleTransaction: builder.query({
-      query: (id) => ({
-        url: `/transaction/getTransaction/${id}`,
+    getUserTransaction: builder.query({
+      query: ({number}) => ({
+        url: `/transaction/getTransaction/${number}`,
         method: "GET",
       }),
       providesTags: ["transaction"],
@@ -55,7 +55,7 @@ export const transactionApi = baseApi.injectEndpoints({
 });
 
 export const {
-  useGetSingleTransactionQuery,
+  useGetUserTransactionQuery,
   useGetTransactionQuery,
   useSendMoneyMutation,
   useCashOutMutation,
