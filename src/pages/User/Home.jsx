@@ -5,7 +5,11 @@ import { useGetSingleUserQuery } from "../../redux/Features/Auth/authApi";
 import SendMoney from "../../components/User/SendMoney";
 import CashOut from "../../components/User/CashOut";
 import BalanceInquiry from "../../components/shared/BalanceInquiry";
-import { useCashOutMutation, useSendMoneyMutation } from "../../redux/Features/Transaction/transactionApi";
+import {
+  useCashOutMutation,
+  useSendMoneyMutation,
+} from "../../redux/Features/Transaction/transactionApi";
+import { Spin } from "antd";
 
 const Home = () => {
   const currentUser = useSelector((state) => state?.auth?.user);
@@ -63,7 +67,7 @@ const Home = () => {
   if (isLoading) {
     return (
       <div className="min-h-[90vh] flex justify-center items-center text-lg">
-        Loading...
+         <Spin size="large" />
       </div>
     );
   }
@@ -97,9 +101,9 @@ const Home = () => {
     try {
       const res = await sendMoney(data);
 
-      const transactionId=res?.data?.data?.transactionId
-      const transactionAmount=res?.data?.data?.transactionAmount
-      const receiverNumber=res?.data?.data?.receiverNumber
+      const transactionId = res?.data?.data?.transactionId;
+      const transactionAmount = res?.data?.data?.transactionAmount;
+      const receiverNumber = res?.data?.data?.receiverNumber;
       if (res?.data) {
         toast.success(
           ` Transaction Successful! \n\n Amount: ${transactionAmount} \n Sent to: ${receiverNumber} \n Transaction ID: ${transactionId}`,
@@ -109,7 +113,6 @@ const Home = () => {
           }
         );
         handleOk();
-      
       } else {
         toast.error(res?.error?.data?.message, { id: toastId, duration: 3000 });
       }
@@ -126,23 +129,32 @@ const Home = () => {
       });
       return;
     }
-    const toastId = toast.loading("Loading..");
+    const toastId = toast.loading("Processing...");
 
-const charged=Number((amount*1.5)/100)
+    const charged = Number((amount * 1.5) / 100);
 
     const data = {
       senderNumber: userData?.data?.number,
       receiverNumber: Number(agentNumber),
       transactionType: "cashOut",
-      transactionAmount: Number(amount)+charged,
-      password:password
+      transactionAmount: Number(amount) + charged,
+      password: password,
     };
 
     try {
       const res = await cashOut(data);
-      console.log(res);
+      const transactionId = res?.data?.data?.transactionId;
+      const transactionAmount = res?.data?.data?.transactionAmount;
+      const receiverNumber = res?.data?.data?.receiverNumber;
+
       if (res?.data) {
-        toast.success("cashOut successfully", { id: toastId, duration: 3000 });
+        toast.success(
+          ` Cash Out Successful! \n\n Amount: ${transactionAmount} \n Agent Number: ${receiverNumber} \n Transaction ID: ${transactionId}`,
+          {
+            id: toastId,
+            duration: 4000,
+          }
+        );
         handleOk();
       } else {
         toast.error(res?.error?.data?.message, { id: toastId, duration: 3000 });

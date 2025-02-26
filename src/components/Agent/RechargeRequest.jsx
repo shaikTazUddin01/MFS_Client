@@ -10,8 +10,6 @@ const RechargeRequest = ({
   handleCancel,
   handleRechargeRequest,
 }) => {
-  const [selectedBalance, setSelectedBalance] = useState(0);
-
   return (
     <MyModal
       title={modalContent?.title}
@@ -21,45 +19,25 @@ const RechargeRequest = ({
       footer={null}
       className="p-6"
     >
-      <MSForm onSubmit={handleRechargeRequest} className="mt-4">
-        <div className="space-y-4">
-          <div className="text-center">
-            <h1 className="text-2xl font-medium mb-2">
-              Available balance:{" "}
-              <span className="text-green-600">{modalContent?.balance}</span>
-            </h1>
-            {selectedBalance > 0 && (
-              <p className="text-lg">Requested Amount: {selectedBalance} </p>
-            )}
-          </div>
-          <MSInput
-            label="Admin Phone Number"
-            name="number"
-            required={true}
-            type="number"
-            variant="bordered"
-            placeholder="Enter recipient's phone number"
-            className="rounded-lg"
-          />
-          <MSInput
-            label="Amount (Taka)"
-            name="amount"
-            required={true}
-            type="number"
-            variant="bordered"
-            placeholder="Enter amount"
-            onChange={(e) => setSelectedBalance(parseInt(e.target.value) || 0)}
-            className="rounded-lg"
-          />
+      <div className="space-y-4">
+        <div className="text-center">
+          <h1 className="text-2xl font-medium mb-2">
+            Available balance:{" "}
+            <span className="text-green-600">
+              {modalContent?.balance.toFixed(2)}
+            </span>
+          </h1>
 
-          <button
-            className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 rounded-lg transition duration-300"
-            type="submit"
-          >
-            Send Request
-          </button>
+          <p className="text-lg">Requested Amount: ৳1,00,000 </p>
         </div>
-      </MSForm>
+
+        <button
+          className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 rounded-lg transition duration-300"
+          onClick={handleRechargeRequest}
+        >
+          Send Request
+        </button>
+      </div>
     </MyModal>
   );
 };

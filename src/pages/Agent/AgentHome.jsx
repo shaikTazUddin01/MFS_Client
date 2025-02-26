@@ -3,13 +3,18 @@ import { useSelector } from "react-redux";
 import { useGetSingleUserQuery } from "../../redux/Features/Auth/authApi";
 import BalanceInquiry from "../../components/shared/BalanceInquiry";
 import RechargeRequest from "../../components/Agent/RechargeRequest";
+import { useSendRequestMutation } from "../../redux/Features/rechargeRequest/rechargeRequestApi";
+import { toast } from "sonner";
 
 const AgentHome = () => {
   const currentUser = useSelector((state) => state.auth.user);
 
+  // get user
   const { data: userData, isLoading } = useGetSingleUserQuery(
     currentUser?.userId
   );
+// send recharge request mutation
+const[rechargeRequest]=useSendRequestMutation()
 
   const [balanceVisible, setBalanceVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -27,6 +32,11 @@ const AgentHome = () => {
     {
       title: "Recharge Request",
       icon: "💸",
+      balance: userData?.data?.balance,
+    },
+    {
+      title: "Cash In",
+      icon: "💰",
       balance: userData?.data?.balance,
     },
   ];
@@ -54,13 +64,37 @@ const AgentHome = () => {
     );
   }
 
-  const handleRechargeRequest = async (fieldsValue) => {
-    console.log(fieldsValue);
+  const handleRechargeRequest = async () => {
+    const agentId=userData?.data?._id;
+  
+    const toastId = toast.loading("sending...");
+    try {
+      const res = await rechargeRequest({agentId});
+
+
+      if (res?.data) {
+        toast.success(
+          `SuccessFully you send a recharge request`,
+          {
+            id: toastId,
+            duration: 4000,
+          }
+        );
+        handleOk();
+      } else {
+        toast.error(res?.error?.data?.message, { id: toastId, duration: 3000 });
+      }
+    } catch (error) {
+      toast.error(error);
+    }
+
+
+
   };
 
   return (
     <div className="min-h-[90vh] flex justify-center items-center bg-gradient-to-br from-gray-200 to-gray-50">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {cardData.map((item, index) => (
           <div
             key={index}
@@ -89,6 +123,16 @@ const AgentHome = () => {
       )}
       {/* recharge request */}
       {modalContent?.title === "Recharge Request" && (
+        <RechargeRequest
+          modalContent={modalContent}
+          modalVisible={modalVisible}
+          handleRechargeRequest={handleRechargeRequest}
+          handleCancel={handleCancel}
+          handleOk={handleOk}
+        />
+      )}
+      {/* recharge request */}
+      {modalContent?.title === "Cash In" && (
         <RechargeRequest
           modalContent={modalContent}
           modalVisible={modalVisible}
