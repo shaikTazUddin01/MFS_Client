@@ -66,7 +66,7 @@ const Login = () => {
 
   return (
     <div
-      className=" min-h-screen w-full lg:p-20 bg-cover flex justify-center items-center"
+      className=" min-h-screen w-full  lg:p-20 bg-cover flex justify-center items-center"
       style={{ backgroundImage: `url(${loginImage})` }}
     >
       <div className="bg-white rounded-2xl h-full  grid  grid-cols-1 lg:grid-cols-2 shadow items-center mx-auto overflow-hidden max-w-[1250px]">

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import bg from "../assets/money.png";
 import {
   BranchesOutlined,
   CheckCircleOutlined,
@@ -8,10 +7,10 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   PayCircleOutlined,
-  TaobaoCircleOutlined,
   TransactionOutlined,
   UsergroupAddOutlined,
   UserOutlined,
+  WalletOutlined,
 } from "@ant-design/icons";
 import { Button, Layout, Menu } from "antd";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -87,7 +86,7 @@ const AdminLayout = () => {
     },
     {
       key: "9",
-      icon: <BranchesOutlined />,
+      icon: <WalletOutlined />,
       label: "WithDraw Request",
       path: "/admin/withDrawRequest",
     }

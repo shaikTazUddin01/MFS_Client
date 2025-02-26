@@ -74,7 +74,7 @@ const ManageUser = () => {
 
   return (
     <div className="">
-      <h1 className="text-3xl font-semibold text-center ">Manage Users</h1>
+      <h1 className="text-3xl font-semibold text-center mb-3">Manage Users</h1>
 
       <div className="mb-4 flex justify-end">
         <Input
