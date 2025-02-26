@@ -8,7 +8,7 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags:['user']
+      invalidatesTags: ["user"],
     }),
     loginApi: builder.mutation({
       query: (data) => ({
@@ -20,7 +20,6 @@ export const authApi = baseApi.injectEndpoints({
 
     getUser: builder.query({
       query: ({ role }) => {
-        
         const params = new URLSearchParams();
         if (role) params.append("role", role);
         return {
@@ -28,14 +27,14 @@ export const authApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      providesTags: ["user"],
+      providesTags: ["user", "transaction"],
     }),
     getSingleUser: builder.query({
       query: (id) => ({
         url: `/auth/getSingleUser/${id}`,
         method: "GET",
       }),
-      providesTags: ["user"],
+      providesTags: ["user", "transaction"],
     }),
     updateUser: builder.mutation({
       query: (data) => ({

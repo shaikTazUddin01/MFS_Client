@@ -2,9 +2,9 @@ import { baseApi } from "../../Api/baseApi";
 
 export const transactionApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    newTransaction: builder.mutation({
+    sendMoney: builder.mutation({
       query: (data) => ({
-        url: "/transaction/newTransaction",
+        url: "/transaction/sendMoney",
         method: "POST",
         body: data,
       }),
@@ -33,5 +33,5 @@ export const transactionApi = baseApi.injectEndpoints({
 export const {
   useGetSingleTransactionQuery,
   useGetTransactionQuery,
-  useNewTransactionMutation,
+  useSendMoneyMutation,
 } = transactionApi;

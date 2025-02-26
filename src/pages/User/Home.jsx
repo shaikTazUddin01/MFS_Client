@@ -5,7 +5,7 @@ import { useGetSingleUserQuery } from "../../redux/Features/Auth/authApi";
 import SendMoney from "../../components/User/SendMoney";
 import CashOut from "../../components/User/CashOut";
 import BalanceInquiry from "../../components/shared/BalanceInquiry";
-import { useNewTransactionMutation } from "../../redux/Features/Transaction/transactionApi";
+import { useSendMoneyMutation } from "../../redux/Features/Transaction/transactionApi";
 
 const Home = () => {
   const currentUser = useSelector((state) => state?.auth?.user);
@@ -23,7 +23,7 @@ const Home = () => {
   };
 
   // send money mutation
-  const [sendMoney]=useNewTransactionMutation()
+  const [sendMoney] = useSendMoneyMutation();
 
   const cardData = [
     {
@@ -67,6 +67,7 @@ const Home = () => {
     );
   }
 
+  // handle send money
   const handleSendMoney = async (fieldsValue) => {
     const { number, amount } = fieldsValue;
 
@@ -76,7 +77,9 @@ const Home = () => {
     }
 
     if (amount > userData?.data?.balance) {
-      toast.error("you don't have enough balance to send this money.", { duration: 3000 });
+      toast.error("you don't have enough balance to send this money.", {
+        duration: 3000,
+      });
       return;
     }
     const fee = Number(amount) > 100 ? 5 : 0;
@@ -89,15 +92,23 @@ const Home = () => {
       transactionAmount: Number(totalAmount),
     };
 
-    console.log(data);
-
     const toastId = toast.loading("sending...");
     try {
-      
       const res = await sendMoney(data);
+
+      const transactionId=res?.data?.data?.transactionId
+      const transactionAmount=res?.data?.data?.transactionAmount
+      const receiverNumber=res?.data?.data?.receiverNumber
       if (res?.data) {
-        toast.success("Money sent successfully", { id: toastId, duration: 3000 });
+        toast.success(
+          ` Transaction Successful! \n\n Amount: ${transactionAmount} \n Sent to: ${receiverNumber} \n Transaction ID: ${transactionId}`,
+          {
+            id: toastId,
+            duration: 4000,
+          }
+        );
         handleOk();
+      
       } else {
         toast.error(res?.error?.data?.message, { id: toastId, duration: 3000 });
       }
