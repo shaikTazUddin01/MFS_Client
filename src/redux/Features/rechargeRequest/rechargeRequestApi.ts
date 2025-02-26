@@ -10,6 +10,14 @@ export const rechargeRequestApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["rechargeRequest"],
     }),
+    rechargeRequest: builder.mutation({
+      query: (data) => ({
+        url: "/rechargeRequest/rechargeRequest",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["rechargeRequest"],
+    }),
     getRequest: builder.query({
       query: (data) => ({
         url: "/rechargeRequest/getRequest",
@@ -24,5 +32,6 @@ export const rechargeRequestApi = baseApi.injectEndpoints({
 
 export const {
  useSendRequestMutation,
- useGetRequestQuery
+ useGetRequestQuery,
+ useRechargeRequestMutation
 } = rechargeRequestApi;

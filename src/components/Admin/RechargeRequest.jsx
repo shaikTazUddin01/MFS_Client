@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { FaEdit } from "react-icons/fa";
 import { Button, Modal } from "antd";
+import { FaEdit } from "react-icons/fa";
 import { toast } from "sonner";
 import MSForm from "../Form/MSForm";
 import MSSelect from "../Form/MSSelect";
-import { useUpdateUserMutation } from "../../redux/Features/Auth/authApi";
+import { useRechargeRequestMutation } from "../../redux/Features/rechargeRequest/rechargeRequestApi";
 
-const UpdateUser = ({ item }) => {
+const RechargeRequest = ({ item }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [updateStatus] = useUpdateUserMutation();
+  const [updateRequest] = useRechargeRequestMutation();
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -18,24 +18,31 @@ const UpdateUser = ({ item }) => {
     setIsModalOpen(false);
   };
 
-
   const handleUpdate = async (data) => {
-    const toastId = toast.loading("updating..");
+    const toastId = toast.loading("Updating...");
     try {
       const updateData = {
         id: item?.key,
-        accountStatus: data?.status,
+        agentId: item?.agentId,
+        requestStatus: data?.status,
       };
-      const res = await updateStatus(updateData);
+
+      const res = await updateRequest(updateData);
 
       if (res?.data) {
-        toast.success("Status Update Success", { id: toastId, duration: 3000 });
+        toast.success(res?.data?.data, { id: toastId, duration: 3000 });
         setIsModalOpen(false);
       } else {
-        toast.error(res?.error?.data?.message, { id: toastId, duration: 3000 });
+        toast.error(res?.error?.data?.message || "someThing went wrong", {
+          id: toastId,
+          duration: 3000,
+        });
       }
     } catch (error) {
-      toast.error(error, { id: toastId, duration: 3000 });
+      toast.error(error.message || "An error occurred", {
+        id: toastId,
+        duration: 3000,
+      });
     }
   };
 
@@ -48,22 +55,22 @@ const UpdateUser = ({ item }) => {
         className="flex items-center gap-1 rounded-full "
       >
         <span className="text-xl">
-        <FaEdit />
+          <FaEdit />
         </span>
         Edit
       </Button>
       <Modal open={isModalOpen} footer={null} onCancel={handleCancel}>
         <div>
           <h1 className="text-xl font-semibold text-center mt-2 -mb-2">
-            Update User Status
+           Agent Recharge Request
           </h1>
-          <div className=" w-[90%] mx-auto">
+          <div className="w-[90%] mx-auto">
             <MSForm onSubmit={handleUpdate}>
               <MSSelect
-                name={"status"}
-                label={"user status"}
+                name="status"
+                label="Agent Status"
                 defaultFieldValue={item?.status}
-                items={[{ name: "Active" }, { name: "Block" }]}
+                items={[{ name: "Accept" }, { name: "Reject" }]}
               />
               <button
                 type="submit"
@@ -79,4 +86,4 @@ const UpdateUser = ({ item }) => {
   );
 };
 
-export default UpdateUser;
+export default RechargeRequest;

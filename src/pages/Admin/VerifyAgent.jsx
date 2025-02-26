@@ -3,10 +3,11 @@ import { useGetUserQuery } from "../../redux/Features/Auth/authApi";
 import AgentRequest from "../../components/Admin/AgentRequest";
 import { useNavigate } from "react-router-dom";
 
-const ManageAgent = () => {
+const VerifyAgent = () => {
   const navigate = useNavigate();
   const { data: userData, isLoading } = useGetUserQuery({
     role: "Agent",
+    status: "Verified",
   });
 
   // agent data
@@ -30,9 +31,7 @@ const ManageAgent = () => {
       render: (text, record) => (
         <span
           className="text-blue-600 cursor-pointer hover:underline"
-          onClick={() =>
-            navigate(`/admin/transactions/${Number(record.agentPhone)}`)
-          }
+          onClick={() => navigate(`/admin/transactions/${Number(record.agentPhone)}`)}
         >
           {text}
         </span>
@@ -67,31 +66,19 @@ const ManageAgent = () => {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      render: (status) => {
-        const statusColors = {
-          Pending: "text-yellow-600",
-          Verified: "text-green-600",
-          Reject: "text-red-600",
-          Block: "text-gray-600",
-        };
-
-        return (
-          <div
-            className={`${statusColors[status] || "text-black"} font-semibold`}
-          >
-            {status}
-          </div>
-        );
-      },
+      render: (item) => (
+        <div
+          className={`${item === "Verified" && "text-green-600"} font-semibold`}
+        >
+          {item}
+        </div>
+      ),
     },
     {
       title: "Action",
       key: "action",
       render: (item) => (
-        <AgentRequest
-          item={item}
-          options={[{ name: "Verified" }, { name: "Block" }]}
-        />
+       <AgentRequest item={item} options={[{ name: "Verified" },{name:"Block"}]}/>
       ),
     },
   ];
@@ -113,4 +100,4 @@ const ManageAgent = () => {
   );
 };
 
-export default ManageAgent;
+export default VerifyAgent;

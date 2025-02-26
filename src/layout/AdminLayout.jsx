@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
 import bg from "../assets/money.png";
 import {
+  BranchesOutlined,
+  CheckCircleOutlined,
+  CreditCardOutlined,
   DashboardOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  PayCircleOutlined,
   TaobaoCircleOutlined,
+  TransactionOutlined,
+  UsergroupAddOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import { Button, Layout, Menu } from "antd";
@@ -38,8 +44,8 @@ const AdminLayout = () => {
       path: "/admin",
     },
     {
-      key: "4",
-      icon: <TaobaoCircleOutlined />,
+      key: "2",
+      icon: <UsergroupAddOutlined/>,
       label: "Manage User",
       path: "/admin/manageUser",
     },
@@ -50,23 +56,35 @@ const AdminLayout = () => {
       path: "/admin/agentRequest",
     },
     {
-      key: "2",
-      icon: <UserOutlined />,
+      key: "4",
+      icon: <CheckCircleOutlined />,
       label: "Verified Agent",
-      path: "/admin/manageAgent",
+      path: "/admin/verifyAgent",
     },
     {
       key: "5",
-      icon: <TaobaoCircleOutlined />,
+      icon: <PayCircleOutlined />,
       label: "Agent Recharge Request",
       path: "/admin/cashInRequest",
     },
     {
       key: "6",
-      icon: <TaobaoCircleOutlined />,
+      icon: <CreditCardOutlined />,
       label: "Add Money To Agent",
       path: "/admin/addMoney",
     },
+    {
+      key: "7",
+      icon: <TransactionOutlined />,
+      label: "All Transaction",
+      path: "/admin/allTransaction",
+    },
+    {
+      key: "8",
+      icon: <BranchesOutlined />,
+      label: "Manage Agent",
+      path: "/admin/manageAgent",
+    }
   ];
 
   const renderMenu = () => (
@@ -116,7 +134,7 @@ const AdminLayout = () => {
         <div className="demo-logo-vertical overflow-hidden" />
         <a
           href="/"
-          className="font-bold text-2xl cursor-pointer hover:text-blue-600 text-white flex justify-center items-center pt-4"
+          className="font-bold text-2xl cursor-pointer hover:text-blue-600 text-white flex justify-center items-center pt-4 pb-3"
         >
           Money
         </a>

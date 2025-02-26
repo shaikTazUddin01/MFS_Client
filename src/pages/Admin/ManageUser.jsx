@@ -7,37 +7,33 @@ import { useNavigate } from "react-router-dom";
 const ManageUser = () => {
   const { data: userData, isLoading } = useGetUserQuery({ role: "User" });
   const [searchNumber, setSearchNumber] = useState("");
- 
   const navigate = useNavigate();
-  // user data
-  const users = userData?.data
-  ?.map((user) => ({
-    key: user?._id,
-    userName: user?.name,
-    userEmail: user?.email,
-    userPhone: `0${String(user?.number)}`,
-    NidNumber: user?.nid,
-    status: user?.accountStatus,
-    balance: `${user?.balance}৳`,
-  }))
-  .filter((user) => user.userPhone.includes(searchNumber))
 
-  // Table columns
+  const users = userData?.data
+    ?.map((user) => ({
+      key: user?._id,
+      userName: user?.name,
+      userEmail: user?.email,
+      userPhone: `0${String(user?.number)}`,
+      NidNumber: user?.nid,
+      status: user?.accountStatus,
+      balance: `${user?.balance}৳`,
+    }))
+    .filter((user) => user.userPhone.includes(searchNumber));
+
   const columns = [
     {
       title: "User Name",
       dataIndex: "userName",
       key: "userName",
-      render: (text,record) =>{
-        const number=Number(record.userPhone)
-        return(
+      render: (text, record) => (
         <span
-        className="text-blue-600 cursor-pointer hover:underline"
-        onClick={() => navigate(`/admin/transactions/${number}`)}
-      >
-        {text}
-      </span>
-      )}
+          className="text-blue-600 cursor-pointer hover:underline"
+          onClick={() => navigate(`/admin/transactions/${Number(record.userPhone)}`)}
+        >
+          {text}
+        </span>
+      ),
     },
     {
       title: "User Email",
@@ -63,45 +59,40 @@ const ManageUser = () => {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      render: (item) => (
-        <div
-          className={`${
-            item === "Active" ? "text-green-600" : "text-red-600"
-          } font-semibold`}
-        >
-          {item}
-        </div>
+      render: (status) => (
+        <span className={`${status === "Active" ? "text-green-600" : "text-red-600"} font-semibold`}>
+          {status}
+        </span>
       ),
     },
     {
       title: "Action",
       key: "action",
-      render: (item) => {
-        return <UpdateUser item={item} />;
-      },
+      render: (item) => <UpdateUser item={item} />,
     },
   ];
 
   return (
-    <div>
-      <h1 className="text-2xl font-semibold text-center mb-5">Manage Users</h1>
-      <div className="mb-4 flex justify-end items-center gap-2">
-       
+    <div className="">
+      <h1 className="text-3xl font-semibold text-center ">Manage Users</h1>
+
+      <div className="mb-4 flex justify-end">
         <Input
           placeholder="Filter by Phone Number"
           value={searchNumber}
           onChange={(e) => setSearchNumber(e.target.value)}
-          className="w-48 border rounded-lg shadow p-2"
+          className="w-48 border border-[#2423233f] rounded-lg shadow p-2"
           allowClear
         />
       </div>
+
       <Table
-        loading={isLoading }
+        loading={isLoading}
         columns={columns}
         dataSource={users}
         pagination={{ pageSize: 5 }}
         scroll={{ x: "max-content" }}
-         className="border rounded-[20px] overflow-hidden shadow"
+        className="border rounded-lg overflow-hidden shadow"
       />
     </div>
   );

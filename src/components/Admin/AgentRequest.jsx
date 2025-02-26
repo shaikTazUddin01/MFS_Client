@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { FaUserEdit } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
 import { Button, Modal } from "antd";
 import { toast } from "sonner";
 import MSForm from "../Form/MSForm";
 import MSSelect from "../Form/MSSelect";
 import { useUpdateUserMutation } from "../../redux/Features/Auth/authApi";
 
-const AgentRequest = ({ item }) => {
+const AgentRequest = ({ item, options }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateStatus] = useUpdateUserMutation();
 
@@ -44,18 +44,17 @@ const AgentRequest = ({ item }) => {
         color="primary"
         variant="outlined"
         onClick={showModal}
-        className="flex items-center gap-1"
-        size="sm"
+        className="flex items-center gap-1 rounded-full "
       >
         <span className="text-xl">
-          <FaUserEdit />
+          <FaEdit />
         </span>
-        Update
+        Edit
       </Button>
       <Modal open={isModalOpen} footer={null} onCancel={handleCancel}>
         <div>
           <h1 className="text-xl font-semibold text-center mt-2 -mb-2">
-            Verified Agent Request
+            Update Agent Status
           </h1>
           <div className=" w-[90%] mx-auto">
             <MSForm onSubmit={handleUpdate}>
@@ -63,7 +62,7 @@ const AgentRequest = ({ item }) => {
                 name={"status"}
                 label={"agent status"}
                 defaultFieldValue={item?.status}
-                items={[{ name: "Pending" }, { name: "Verified" },{ name: "Reject" }]}
+                items={options}
               />
               <button
                 type="submit"

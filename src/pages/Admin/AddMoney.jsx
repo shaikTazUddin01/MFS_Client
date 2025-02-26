@@ -48,7 +48,7 @@ const AddMoneyToAgent = () => {
   return (
     <div className="max-w-[600px] mx-auto h-[80vh] flex justify-center flex-col">
       <div className="text-center">
-        <h1 className="text-2xl font-semibold ">Add Money To Agent Account</h1>
+        <h1 className="text-3xl font-semibold ">Add Money To Agent Account</h1>
       </div>
       <div className="mt-4 max-w-[600px] border rounded-[20px] p-5 shadow-lg ">
         <MSForm onSubmit={handleAddMoney}>

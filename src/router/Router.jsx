@@ -10,12 +10,14 @@ import Home from "../pages/User/Home";
 import AdminProtectedRouter from "./AdminProtectedRouter";
 import AdminLayout from "../layout/AdminLayout";
 import DashBoard from "../pages/Admin/DashBoard";
-import ManageAgent from "../pages/Admin/ManageAgent";
 import ManageUser from "../pages/Admin/ManageUser";
 import ManageAgentRequest from "../pages/Admin/AgentRequest";
 import CashInRequest from "../pages/Admin/CashInRequest";
 import AddMoneyToAgent from "../pages/Admin/AddMoney";
 import UserTransaction from "../pages/Admin/UserTransaction";
+import VerifyAgent from "../pages/Admin/VerifyAgent";
+import ManageAgent from "../pages/Admin/ManageAgent";
+import AllTransaction from "../pages/Admin/AllTransaction";
 
 export const router = createBrowserRouter([
   {
@@ -59,8 +61,8 @@ export const router = createBrowserRouter([
         element: <DashBoard />,
       },
       {
-        path: "manageAgent",
-        element: <ManageAgent />,
+        path: "verifyAgent",
+        element: <VerifyAgent />,
       },
       {
         path: "manageUser",
@@ -76,11 +78,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "addMoney",
-        element: <AddMoneyToAgent/>,
+        element: <AddMoneyToAgent />,
       },
       {
         path: "transactions/:number",
-        element: <UserTransaction/>,
+        element: <UserTransaction />,
+      },
+      {
+        path: "manageAgent",
+        element: <ManageAgent />,
+      },
+      {
+        path: "allTransaction",
+        element: <AllTransaction />,
       },
     ],
   },

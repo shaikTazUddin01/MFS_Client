@@ -68,15 +68,14 @@ const ManageAgentRequest = () => {
       title: "Action",
       key: "action",
       render: (item) => {
-        console.log(item);
-        return <AgentRequest item={item} />;
+        <AgentRequest item={item} options={[{ name: "Pending" }, { name: "Verified" },{ name: "Reject" }]}/>
       },
     },
   ];
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-center mb-5">
+      <h1 className="text-3xl font-semibold text-center mb-5">
         Manage Agent Request
       </h1>
       <Table

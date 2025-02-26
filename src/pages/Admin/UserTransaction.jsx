@@ -12,7 +12,7 @@ const UserTransaction = () => {
 
   const transactions = transactionData?.data?.map((transaction) => ({
     key: transaction?.transactionId,
-    mobileNumber: number,
+    mobileNumber: `0${number}`,
     transactionId: transaction?.transactionId,
     amount: `${transaction?.transactionAmount}৳`,
     type: transaction?.transactionType,
@@ -58,7 +58,7 @@ const UserTransaction = () => {
         Back
       </Button>
 
-      <h1 className="text-2xl font-semibold text-center mb-5">
+      <h1 className="text-3xl font-semibold text-center mb-5">
         User Transactions
       </h1>
 
