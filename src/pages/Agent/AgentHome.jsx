@@ -5,6 +5,8 @@ import BalanceInquiry from "../../components/shared/BalanceInquiry";
 import RechargeRequest from "../../components/Agent/RechargeRequest";
 import { useSendRequestMutation } from "../../redux/Features/rechargeRequest/rechargeRequestApi";
 import { toast } from "sonner";
+import WithDrawRequest from "../../components/Agent/WithdrawRequest";
+import { Spin } from "antd";
 
 const AgentHome = () => {
   const currentUser = useSelector((state) => state.auth.user);
@@ -13,8 +15,8 @@ const AgentHome = () => {
   const { data: userData, isLoading } = useGetSingleUserQuery(
     currentUser?.userId
   );
-// send recharge request mutation
-const[rechargeRequest]=useSendRequestMutation()
+  // send recharge request mutation
+  const [rechargeRequest] = useSendRequestMutation();
 
   const [balanceVisible, setBalanceVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -33,6 +35,12 @@ const[rechargeRequest]=useSendRequestMutation()
       title: "Recharge Request",
       icon: "💸",
       balance: userData?.data?.balance,
+    },
+    {
+      title: "Withdraw Request",
+      icon: "💰",
+      balance: userData?.data?.balance,
+      agentId:userData?.data?._id
     },
     {
       title: "Cash In",
@@ -59,27 +67,23 @@ const[rechargeRequest]=useSendRequestMutation()
   if (isLoading) {
     return (
       <div className="min-h-[90vh] flex justify-center items-center text-lg">
-        Loading...
+        <Spin size="large" />
       </div>
     );
   }
 
   const handleRechargeRequest = async () => {
-    const agentId=userData?.data?._id;
-  
+    const agentId = userData?.data?._id;
+
     const toastId = toast.loading("sending...");
     try {
-      const res = await rechargeRequest({agentId});
-
+      const res = await rechargeRequest({ agentId });
 
       if (res?.data) {
-        toast.success(
-          `SuccessFully you send a recharge request`,
-          {
-            id: toastId,
-            duration: 4000,
-          }
-        );
+        toast.success(`SuccessFully you send a recharge request`, {
+          id: toastId,
+          duration: 4000,
+        });
         handleOk();
       } else {
         toast.error(res?.error?.data?.message, { id: toastId, duration: 3000 });
@@ -87,14 +91,11 @@ const[rechargeRequest]=useSendRequestMutation()
     } catch (error) {
       toast.error(error);
     }
-
-
-
   };
 
   return (
     <div className="min-h-[90vh] flex justify-center items-center bg-gradient-to-br from-gray-200 to-gray-50">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
         {cardData.map((item, index) => (
           <div
             key={index}
@@ -127,6 +128,15 @@ const[rechargeRequest]=useSendRequestMutation()
           modalContent={modalContent}
           modalVisible={modalVisible}
           handleRechargeRequest={handleRechargeRequest}
+          handleCancel={handleCancel}
+          handleOk={handleOk}
+        />
+      )}
+      {/* withdraw request */}
+      {modalContent?.title === "Withdraw Request" && (
+        <WithDrawRequest
+          modalContent={modalContent}
+          modalVisible={modalVisible}
           handleCancel={handleCancel}
           handleOk={handleOk}
         />
