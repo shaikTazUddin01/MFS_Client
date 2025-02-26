@@ -7,6 +7,7 @@ import { useSendRequestMutation } from "../../redux/Features/rechargeRequest/rec
 import { toast } from "sonner";
 import WithDrawRequest from "../../components/Agent/WithdrawRequest";
 import { Spin } from "antd";
+import UserCashIn from "../../components/Agent/UserCashIn";
 
 const AgentHome = () => {
   const currentUser = useSelector((state) => state.auth.user);
@@ -27,25 +28,26 @@ const AgentHome = () => {
   const cardData = [
     {
       title: "Balance Inquiry",
-      icon: "🔍",
+      icon: "📊",
       balance: userData?.data?.balance,
       action: toggleBalanceVisibility,
     },
     {
       title: "Recharge Request",
-      icon: "💸",
+      icon: "⚡",
       balance: userData?.data?.balance,
     },
     {
       title: "Withdraw Request",
-      icon: "💰",
+      icon: "🏦",
       balance: userData?.data?.balance,
       agentId:userData?.data?._id
     },
     {
-      title: "Cash In",
+      title: "User Cash-In",
       icon: "💰",
       balance: userData?.data?.balance,
+      phoneNumber:userData?.data?.number
     },
   ];
 
@@ -142,11 +144,10 @@ const AgentHome = () => {
         />
       )}
       {/* recharge request */}
-      {modalContent?.title === "Cash In" && (
-        <RechargeRequest
+      {modalContent?.title === "User Cash-In" && (
+        <UserCashIn
           modalContent={modalContent}
           modalVisible={modalVisible}
-          handleRechargeRequest={handleRechargeRequest}
           handleCancel={handleCancel}
           handleOk={handleOk}
         />

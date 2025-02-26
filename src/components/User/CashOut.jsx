@@ -70,7 +70,7 @@ const CashOut = ({
             className="rounded-lg"
           />
           <MSInput
-            label="Enter You PIN"
+            label="Enter Your PIN"
             name="password"
             required={true}
             type="text"
