@@ -2,9 +2,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 
-  // "https://mfs-server-phi.vercel.app/api",
-  "http://localhost:3000/api",
+  baseUrl: "https://mfs-server-phi.vercel.app/api",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
@@ -20,5 +18,5 @@ export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQuery,
   endpoints: (builder) => ({}),
-  tagTypes: ["user","transaction","rechargeRequest","withdrawRequest"],
+  tagTypes: ["user", "transaction", "rechargeRequest", "withdrawRequest"],
 });

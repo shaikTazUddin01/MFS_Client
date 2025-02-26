@@ -12,6 +12,7 @@ const MSForm = ({ onSubmit, children, defaultValues }) => {
 
   const submit = (data) => {
     onSubmit(data);
+    methods.reset()
   };
 
   return (

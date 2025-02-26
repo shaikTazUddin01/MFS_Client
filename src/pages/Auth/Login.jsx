@@ -18,19 +18,19 @@ const Login = () => {
   const DemoUserInFo = () => {
     setDefaultUserInfo({
       email: "taz@gmail.com",
-      password: "123456",
+      password: "12345",
     });
   };
   const DemoAgentInFo = () => {
     setDefaultUserInfo({
-      email: "admin@gmail.com",
-      password: "admin123",
+      email: "agent@gmail.com",
+      password: "12345",
     });
   };
   const DemoAdminInFo = () => {
     setDefaultUserInfo({
       email: "admin@gmail.com",
-      password: "admin123",
+      password: "12345",
     });
   };
   // dispatch

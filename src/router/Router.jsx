@@ -19,6 +19,7 @@ import VerifyAgent from "../pages/Admin/VerifyAgent";
 import ManageAgent from "../pages/Admin/ManageAgent";
 import AllTransaction from "../pages/Admin/AllTransaction";
 import AllNotification from "../pages/User/AllNotification";
+import WithdrawRequest from "../pages/Admin/WithdrawRequest";
 
 export const router = createBrowserRouter([
   {
@@ -100,6 +101,10 @@ export const router = createBrowserRouter([
       {
         path: "allTransaction",
         element: <AllTransaction />,
+      },
+      {
+        path: "withDrawRequest",
+        element: <WithdrawRequest />,
       },
     ],
   },

@@ -1,27 +1,30 @@
-import { Table, Tag } from "antd";
-import { useGetRequestQuery } from "../../redux/Features/rechargeRequest/rechargeRequestApi";
+import { Table } from "antd";
 import RechargeRequest from "../../components/Admin/RechargeRequest";
+import { useGetWithdrawRequestQuery } from "../../redux/Features/withdrawRequest/withdrawRequest";
+import AgentWithdrawRequest from "../../components/Admin/AgentWithdrawRequest";
 
-const CashInRequest = () => {
-  const { data, isLoading } = useGetRequestQuery();
+const WithdrawRequest = () => {
+  const { data, isLoading } = useGetWithdrawRequestQuery();
+
+  console.log(data);
 
   const requests = data?.data?.map((request) => ({
     key: request._id,
     agentId:request?.agentId?._id,
     userName: request?.agentId?.name || "Unknown",
     userEmail: request?.agentId?.email || "N/A",
-    amount: `100000 ৳`,
+    amount: request?.amount,
     status: request.status,
   }));
 
   const columns = [
     {
-      title: "Agent Name",
+      title: "User Name",
       dataIndex: "userName",
       key: "userName",
     },
     {
-      title: "Agent Email",
+      title: "User Email",
       dataIndex: "userEmail",
       key: "userEmail",
     },
@@ -33,13 +36,13 @@ const CashInRequest = () => {
     {
         title: "Action",
         key: "action",
-        render: (item) => <RechargeRequest item={item} />,
+        render: (item) => <AgentWithdrawRequest item={item} />,
       },
   ];
 
   return (
     <div>
-      <h1 className="text-3xl font-semibold text-center mb-5">Cash-In Requests</h1>
+      <h1 className="text-3xl font-semibold text-center mb-5">WithDraw Requests</h1>
       <Table
         loading={isLoading}
         columns={columns}
@@ -51,4 +54,4 @@ const CashInRequest = () => {
   );
 };
 
-export default CashInRequest;
+export default WithdrawRequest;

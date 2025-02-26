@@ -1,11 +1,8 @@
-import { useState } from "react";
-import { Table, Dropdown, Menu, Button, Select } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+import { Table } from "antd";;
 import { useGetUserQuery } from "../../redux/Features/Auth/authApi";
-import UpdateUser from "../../components/Admin/UpdateUser";
 import AgentRequest from "../../components/Admin/AgentRequest";
 
-const { Option } = Select;
+
 
 const ManageAgentRequest = () => {
   const { data: userData, isLoading } = useGetUserQuery({
@@ -67,9 +64,12 @@ const ManageAgentRequest = () => {
     {
       title: "Action",
       key: "action",
-      render: (item) => {
-        <AgentRequest item={item} options={[{ name: "Pending" }, { name: "Verified" },{ name: "Reject" }]}/>
-      },
+      render: (item) => (
+        <AgentRequest
+          item={item}
+          options={[{ name: "Verified" }, { name: "Reject" }]}
+        />
+      ),
     },
   ];
 

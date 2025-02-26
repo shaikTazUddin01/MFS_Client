@@ -84,6 +84,12 @@ const AdminLayout = () => {
       icon: <BranchesOutlined />,
       label: "Manage Agent",
       path: "/admin/manageAgent",
+    },
+    {
+      key: "9",
+      icon: <BranchesOutlined />,
+      label: "WithDraw Request",
+      path: "/admin/withDrawRequest",
     }
   ];
 
@@ -133,7 +139,7 @@ const AdminLayout = () => {
       >
         <div className="demo-logo-vertical overflow-hidden" />
         <a
-          href="/"
+          href="/admin"
           className="font-bold text-2xl cursor-pointer hover:text-blue-600 text-white flex justify-center items-center pt-4 pb-3"
         >
           FinanceFlow 
