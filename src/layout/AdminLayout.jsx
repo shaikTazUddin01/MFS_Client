@@ -45,6 +45,12 @@ const AdminLayout = () => {
     },
     {
       key: "3",
+      icon: <UserOutlined />,
+      label: "Agent Request",
+      path: "/admin/agentRequest",
+    },
+    {
+      key: "4",
       icon: <TaobaoCircleOutlined />,
       label: "Manage User",
       path: "/admin/manageUser",

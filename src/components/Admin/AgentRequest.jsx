@@ -2,13 +2,13 @@ import { useState } from "react";
 import { FaUserEdit } from "react-icons/fa";
 import { Button, Modal } from "antd";
 import { toast } from "sonner";
-import MSForm from "../../Form/MSForm";
-import MSSelect from "../../Form/MSSelect";
-import { useUpdateUserMutation } from "../../../redux/Features/Auth/authApi";
+import MSForm from "../Form/MSForm";
+import MSSelect from "../Form/MSSelect";
+import { useUpdateUserMutation } from "../../redux/Features/Auth/authApi";
 
-const UpdateUser = ({ userInFo }) => {
+const AgentRequest = ({ item }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [updateRole] = useUpdateUserMutation();
+  const [updateStatus] = useUpdateUserMutation();
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -19,16 +19,16 @@ const UpdateUser = ({ userInFo }) => {
   };
 
   const handleUpdate = async (data) => {
-    const toastId = toast.loading("Loading..");
+    const toastId = toast.loading("updating..");
     try {
       const updateData = {
-        id: userInFo?.key,
-        role: data?.role,
+        id: item?.key,
+        accountStatus: data?.status,
       };
-      const res = await updateRole(updateData);
-      // console.log(res);
+      const res = await updateStatus(updateData);
+
       if (res?.data) {
-        toast.success("update success", { id: toastId, duration: 3000 });
+        toast.success("Agent Verified", { id: toastId, duration: 3000 });
         setIsModalOpen(false);
       } else {
         toast.error(res?.error?.data?.message, { id: toastId, duration: 3000 });
@@ -54,15 +54,15 @@ const UpdateUser = ({ userInFo }) => {
       <Modal open={isModalOpen} footer={null} onCancel={handleCancel}>
         <div>
           <h1 className="text-xl font-semibold text-center mt-2 -mb-2">
-            Update User Role
+            Verified Agent Request
           </h1>
-          <div className="shadow-lg w-[90%] mx-auto">
+          <div className=" w-[90%] mx-auto">
             <MSForm onSubmit={handleUpdate}>
               <MSSelect
-                name={"role"}
-                label={"Current Role"}
-                defaultFieldValue={userInFo?.role}
-                items={[{ name: "USER" }, { name: "ADMIN" }]}
+                name={"status"}
+                label={"agent status"}
+                defaultFieldValue={item?.status}
+                items={[{ name: "Pending" }, { name: "Verified" }]}
               />
               <button
                 type="submit"
@@ -78,4 +78,4 @@ const UpdateUser = ({ userInFo }) => {
   );
 };
 
-export default UpdateUser;
+export default AgentRequest;

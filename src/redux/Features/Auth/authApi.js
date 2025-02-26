@@ -19,9 +19,10 @@ export const authApi = baseApi.injectEndpoints({
     }),
 
     getUser: builder.query({
-      query: ({ role }) => {
+      query: ({ role,status }) => {
         const params = new URLSearchParams();
         if (role) params.append("role", role);
+        if (status) params.append("accountStatus", status);
         return {
           url: `/auth/getUser?${params.toString()}`,
           method: "GET",

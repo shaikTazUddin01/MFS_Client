@@ -1,9 +1,14 @@
-import { Table } from "antd";
+import { useState } from "react";
+import { Table, Dropdown, Menu, Button, Select } from "antd";
+import { DownOutlined } from "@ant-design/icons";
 import { useGetUserQuery } from "../../redux/Features/Auth/authApi";
 import UpdateUser from "../../components/Admin/UpdateUser";
+import AgentRequest from "../../components/Admin/AgentRequest";
 
-const ManageUser = () => {
-  const { data: userData, isLoading } = useGetUserQuery({ role: "User" });
+const { Option } = Select;
+
+const ManageAgentRequest = () => {
+  const { data: userData, isLoading } = useGetUserQuery({ role: "Agent",status:"Pending" });
   // Mock data
   const users = userData?.data?.map((user) => ({
     key: user?._id,
@@ -18,17 +23,17 @@ const ManageUser = () => {
   // Table columns
   const columns = [
     {
-      title: "User Name",
+      title: "Agent Name",
       dataIndex: "userName",
       key: "userName",
     },
     {
-      title: "User Email",
+      title: "Agent Email",
       dataIndex: "userEmail",
       key: "userEmail",
     },
     {
-      title: "User Phone",
+      title: "Agent Phone",
       dataIndex: "userPhone",
       key: "userPhone",
     },
@@ -61,14 +66,14 @@ const ManageUser = () => {
       key: "action",
       render: (item) => {
         console.log(item);
-        return <UpdateUser item={item} />;
+        return <AgentRequest item={item} />;
       },
     },
   ];
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-center mb-5">Manage Users</h1>
+      <h1 className="text-2xl font-semibold text-center mb-5">Manage Agent Request</h1>
       <Table
         loading={isLoading}
         columns={columns}
@@ -80,4 +85,4 @@ const ManageUser = () => {
   );
 };
 
-export default ManageUser;
+export default ManageAgentRequest;

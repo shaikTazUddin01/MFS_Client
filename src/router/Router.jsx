@@ -12,6 +12,7 @@ import AdminLayout from "../layout/AdminLayout";
 import DashBoard from "../pages/Admin/DashBoard";
 import ManageAgent from "../pages/Admin/ManageAgent";
 import ManageUser from "../pages/Admin/ManageUser";
+import ManageAgentRequest from "../pages/Admin/AgentRequest";
 
 export const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
       {
         path: "manageUser",
         element: <ManageUser />,
+      },
+      {
+        path: "agentRequest",
+        element: <ManageAgentRequest />,
       },
     ],
   },
