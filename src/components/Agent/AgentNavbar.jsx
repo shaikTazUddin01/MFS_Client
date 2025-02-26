@@ -106,7 +106,7 @@ const AgentNavbar = () => {
             <button onClick={handleNotificationClick} className="relative">
               <IoNotifications size={25} />
               {unreadCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold px-[6px] py-[2px] rounded-full">
+                <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold px-[6px] py-[1px] rounded-full">
                   {unreadCount}
                 </span>
               )}
