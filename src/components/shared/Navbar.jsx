@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Drawer } from "antd";
 import { IoCloseSharp } from "react-icons/io5";
 import { HiMenuAlt1 } from "react-icons/hi";
+import user from '../../assets/user.jpg'
 
 const Navbar = () => {
   const currentUser = useUser();
@@ -71,11 +72,9 @@ const Navbar = () => {
                 </div>
                 <ul className="space-y-2 text-[16px] font-semibold text-center">
                   {/* <li className="bg-slate-200 hover:bg-blue-600 hover:text-white py-1 px-1 rounded">
-                    <a href="/">Lessons</a>
+                    <a href="/">transactions</a>
                   </li>
-                  <li className="bg-slate-200 hover:bg-blue-600 hover:text-white py-1 px-1 rounded">
-                    <a href="/tutorials">Tutorials</a>
-                  </li> */}
+                  */}
                   <li className="bg-blue-600 hover:bg-blue-700 py-1 px-1 rounded text-center text-white cursor-pointer"  onClick={() => handleLogOut()}>
                     Log Out
                   </li>
@@ -93,16 +92,12 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 text-[16px]">{navItems}</ul>
         </div>
-
+       
         {/* Navbar End lergh screen*/}
         <div className="navbar-end relative">
           {currentUser ? (
-            <img
-              src={currentUser?.image}
-              alt="User Avatar"
-              className="h-10 w-10 rounded-full object-cover"
-              onClick={() => setToggle(!toggle)}
-            />
+            
+            <span className="h-9 w-9 rounded-full flex items-center justify-center bg-white text-blue-600 font-bold text-xl cursor-pointer border border-blue" onClick={() => setToggle(!toggle)}>{currentUser?.name?.slice(0,1)}</span>
           ) : (
             <a href="/login" className="btn">
               Login

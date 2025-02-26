@@ -6,7 +6,7 @@ import { useGetUserQuery } from "../../redux/Features/Auth/authApi";
 const { Option } = Select;
 
 const ManageAgent = () => {
-    const {data:userData,isLoading}=useGetUserQuery({role:"Agent"})
+    const {data:userData,isLoading}=useGetUserQuery({role:"Agent",status:"Verified"})
     // Mock data
     const users=userData?.data?.map((user)=>(
         
@@ -16,7 +16,7 @@ const ManageAgent = () => {
           userEmail: user?.email,
           userPhone: user?.number,
           NidNumber: user?.nid,
-          status: "Active",
+          status:user?.accountStatus,
           balance:`৳ ${user?.balance}`,
         }
     ))
@@ -36,17 +36,17 @@ const ManageAgent = () => {
   // Table columns
   const columns = [
     {
-      title: "User Name",
+      title: "Agent Name",
       dataIndex: "userName",
       key: "userName",
     },
     {
-      title: "User Email",
+      title: "Agent Email",
       dataIndex: "userEmail",
       key: "userEmail",
     },
     {
-      title: "User Phone",
+      title: "Agent Phone",
       dataIndex: "userPhone",
       key: "userPhone",
     },
@@ -62,8 +62,7 @@ const ManageAgent = () => {
       render: (item) => (
         <div
           className={`${
-            item === "Active" ? "text-green-600" : "text-red-600"
-          } font-semibold`}
+            item === "Verified" && "text-green-600"} font-semibold`}
         >
           {item}
         </div>
@@ -82,12 +81,13 @@ const ManageAgent = () => {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h1 style={{ marginBottom: "20px" }}>Manage Agent</h1>
+        <h1 className="text-2xl font-semibold text-center mb-5">Verified Agent</h1>
       <Table
         columns={columns}
         dataSource={users}
         pagination={{ pageSize: 5 }}
         scroll={{ x: "max-content" }}
+         className="border rounded-[20px] overflow-hidden shadow"
       />
     </div>
   );

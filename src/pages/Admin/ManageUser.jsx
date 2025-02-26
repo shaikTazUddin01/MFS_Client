@@ -75,6 +75,7 @@ const ManageUser = () => {
         dataSource={users}
         pagination={{ pageSize: 5 }}
         scroll={{ x: "max-content" }}
+         className="border rounded-[20px] overflow-hidden shadow"
       />
     </div>
   );

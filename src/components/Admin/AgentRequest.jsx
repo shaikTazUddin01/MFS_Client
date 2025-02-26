@@ -45,6 +45,7 @@ const AgentRequest = ({ item }) => {
         variant="outlined"
         onClick={showModal}
         className="flex items-center gap-1"
+        size="sm"
       >
         <span className="text-xl">
           <FaUserEdit />

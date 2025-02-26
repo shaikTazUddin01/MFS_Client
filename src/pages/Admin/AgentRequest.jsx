@@ -8,7 +8,10 @@ import AgentRequest from "../../components/Admin/AgentRequest";
 const { Option } = Select;
 
 const ManageAgentRequest = () => {
-  const { data: userData, isLoading } = useGetUserQuery({ role: "Agent",status:"Pending" });
+  const { data: userData, isLoading } = useGetUserQuery({
+    role: "Agent",
+    status: "Pending",
+  });
   // Mock data
   const users = userData?.data?.map((user) => ({
     key: user?._id,
@@ -73,13 +76,16 @@ const ManageAgentRequest = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-center mb-5">Manage Agent Request</h1>
+      <h1 className="text-2xl font-semibold text-center mb-5">
+        Manage Agent Request
+      </h1>
       <Table
         loading={isLoading}
         columns={columns}
         dataSource={users}
         pagination={{ pageSize: 5 }}
         scroll={{ x: "max-content" }}
+        className="border rounded-[20px] overflow-hidden shadow"
       />
     </div>
   );

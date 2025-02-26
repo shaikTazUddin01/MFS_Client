@@ -26,6 +26,14 @@ export const transactionApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["transaction"],
     }),
+    addMoney: builder.mutation({
+      query: (data) => ({
+        url: "/transaction/addMoney",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["transaction"],
+    }),
 
     getTransaction: builder.query({
       query: () => {
@@ -51,5 +59,6 @@ export const {
   useGetTransactionQuery,
   useSendMoneyMutation,
   useCashOutMutation,
-  useCashInMutation
+  useCashInMutation,
+  useAddMoneyMutation
 } = transactionApi;

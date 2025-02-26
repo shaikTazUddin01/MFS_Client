@@ -40,7 +40,7 @@ const AdminLayout = () => {
     {
       key: "2",
       icon: <UserOutlined />,
-      label: "Manage Agent",
+      label: "Verified Agent",
       path: "/admin/manageAgent",
     },
     {
@@ -54,6 +54,18 @@ const AdminLayout = () => {
       icon: <TaobaoCircleOutlined />,
       label: "Manage User",
       path: "/admin/manageUser",
+    },
+    {
+      key: "5",
+      icon: <TaobaoCircleOutlined />,
+      label: "Agent Recharge Request",
+      path: "/admin/cashInRequest",
+    },
+    {
+      key: "6",
+      icon: <TaobaoCircleOutlined />,
+      label: "Add Money To Agent",
+      path: "/admin/addMoney",
     },
   ];
 
@@ -178,9 +190,9 @@ const AdminLayout = () => {
         </Header>
         <Content
           className="bg-cover bg-no-repeat"
-        //   style={{ backgroundImage: `url(${bg})` }}
+          //   style={{ backgroundImage: `url(${bg})` }}
         >
-          <div className="bg-[#2423233f] h-full p-5">
+          <div className="bg-[#ffffff] h-full p-5">
             <Outlet />
           </div>
         </Content>

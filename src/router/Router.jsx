@@ -13,6 +13,8 @@ import DashBoard from "../pages/Admin/DashBoard";
 import ManageAgent from "../pages/Admin/ManageAgent";
 import ManageUser from "../pages/Admin/ManageUser";
 import ManageAgentRequest from "../pages/Admin/AgentRequest";
+import CashInRequest from "../pages/Admin/CashInRequest";
+import AddMoneyToAgent from "../pages/Admin/AddMoney";
 
 export const router = createBrowserRouter([
   {
@@ -66,6 +68,14 @@ export const router = createBrowserRouter([
       {
         path: "agentRequest",
         element: <ManageAgentRequest />,
+      },
+      {
+        path: "cashInRequest",
+        element: <CashInRequest />,
+      },
+      {
+        path: "addMoney",
+        element: <AddMoneyToAgent/>,
       },
     ],
   },

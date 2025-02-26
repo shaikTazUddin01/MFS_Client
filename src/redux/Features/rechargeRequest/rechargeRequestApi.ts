@@ -10,10 +10,19 @@ export const rechargeRequestApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["rechargeRequest"],
     }),
+    getRequest: builder.query({
+      query: (data) => ({
+        url: "/rechargeRequest/getRequest",
+        method: "GET",
+        body: data,
+      }),
+      providesTags: ["rechargeRequest"],
+    }),
   
   }),
 });
 
 export const {
- useSendRequestMutation
+ useSendRequestMutation,
+ useGetRequestQuery
 } = rechargeRequestApi;
