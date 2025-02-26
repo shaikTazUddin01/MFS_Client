@@ -5,7 +5,7 @@ import { useGetSingleUserQuery } from "../../redux/Features/Auth/authApi";
 import SendMoney from "../../components/User/SendMoney";
 import CashOut from "../../components/User/CashOut";
 import BalanceInquiry from "../../components/shared/BalanceInquiry";
-import { useSendMoneyMutation } from "../../redux/Features/Transaction/transactionApi";
+import { useCashOutMutation, useSendMoneyMutation } from "../../redux/Features/Transaction/transactionApi";
 
 const Home = () => {
   const currentUser = useSelector((state) => state?.auth?.user);
@@ -24,6 +24,7 @@ const Home = () => {
 
   // send money mutation
   const [sendMoney] = useSendMoneyMutation();
+  const [cashOut] = useCashOutMutation();
 
   const cardData = [
     {
@@ -118,40 +119,37 @@ const Home = () => {
   };
   // handle cash out
   const handleCashOut = async (fieldsValue) => {
-    console.log(fieldsValue);
     const { agentNumber, amount, password } = fieldsValue;
-
-    if (amount < 50) {
-      toast.error("Minimum send amount is 50 Taka.", { duration: 3000 });
+    if (amount > userData?.data?.balance) {
+      toast.error("you don't have enough balance to cashOut this money.", {
+        duration: 3000,
+      });
       return;
     }
-    const fee = (amount * 1.5) / 100;
-    const totalAmount = amount + fee;
+    const toastId = toast.loading("Loading..");
 
-    console.log(
-      "Sending:",
-      amount,
-      "Taka to",
-      agentNumber,
-      "Fee:",
-      fee,
-      "Total:",
-      totalAmount
-    );
+const charged=Number((amount*1.5)/100)
 
-    // const toastId = toast.loading("Loading..");
-    // try {
-    //   const data = fieldsValue;
-    //   const res = await sendMoney(data);
-    //   if (res?.data) {
-    //     toast.success("Money sent successfully", { id: toastId, duration: 3000 });
-    //     handleOk();
-    //   } else {
-    //     toast.error(res?.error?.data?.message, { id: toastId, duration: 3000 });
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    const data = {
+      senderNumber: userData?.data?.number,
+      receiverNumber: Number(agentNumber),
+      transactionType: "cashOut",
+      transactionAmount: Number(amount)+charged,
+      password:password
+    };
+
+    try {
+      const res = await cashOut(data);
+      console.log(res);
+      if (res?.data) {
+        toast.success("cashOut successfully", { id: toastId, duration: 3000 });
+        handleOk();
+      } else {
+        toast.error(res?.error?.data?.message, { id: toastId, duration: 3000 });
+      }
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   return (

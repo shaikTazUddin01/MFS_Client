@@ -33,7 +33,10 @@ const CashOut = ({
                     : "text-red-600"
                 }`}
               >
-                {modalContent?.balance - selectedBalance}
+                {(
+                  modalContent?.balance -
+                  (selectedBalance + (selectedBalance * 1.5) / 100)
+                ).toFixed(2)}
               </span>
             </h1>
             {selectedBalance > 0 && (
@@ -80,7 +83,7 @@ const CashOut = ({
             className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 rounded-lg transition duration-300"
             type="submit"
           >
-            Send Money
+            Cash Out
           </button>
         </div>
       </MSForm>
