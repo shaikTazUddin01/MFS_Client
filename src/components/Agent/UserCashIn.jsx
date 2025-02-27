@@ -23,12 +23,13 @@ const UserCashIn = ({ modalContent, modalVisible, handleOk, handleCancel }) => {
 
     const data = {
       senderNumber: modalContent?.phoneNumber,
-      receiverNumber: Number(number),
+      receiverNumber: number,
       transactionType: "cashIn",
       transactionAmount: Number(amount) ,
       password: password,
     };
 
+    
     try {
       const res = await cashIn(data);
       const transactionId = res?.data?.data?.transactionId;

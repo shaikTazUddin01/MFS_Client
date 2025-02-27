@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Drawer } from "antd";
 import { IoCloseSharp, IoNotifications } from "react-icons/io5";
 import { HiMenuAlt1 } from "react-icons/hi";
-import { useGetUserTransactionQuery } from "../../redux/Features/Transaction/transactionApi";
+import { useGetUserTransactionQuery, useReadNotificationMutation } from "../../redux/Features/Transaction/transactionApi";
 
 const Navbar = () => {
   const currentUser = useUser();
@@ -22,10 +22,10 @@ const Navbar = () => {
   const { data: transactionData, isLoading } = useGetUserTransactionQuery({
     number: user?.number,
   });
-
+const [readNotificationStatus]=useReadNotificationMutation()
   const notifications = transactionData?.data || [];
 
-  const unreadCount = notifications.filter((notif) => !notif.read).length;
+  const unreadCount = notifications.filter((notif) => notif.isRead===false).length;
 
   const showDrawer = () => setOpen(true);
   const onClose = () => setOpen(false);
@@ -37,8 +37,11 @@ const Navbar = () => {
     navigate("/login");
   };
 
-  const handleNotificationClick = () => {
+  const handleNotificationClick = async() => {
     setIsDropdownOpen(!isDropdownOpen);
+
+  await readNotificationStatus({number:user?.number,isRead:true})
+
   };
 
   return (
@@ -101,7 +104,7 @@ const Navbar = () => {
         <div className="relative flex items-center gap-5">
           {/* Notification Icon */}
           <div className="relative">
-            <button onClick={handleNotificationClick} className="relative">
+            <button onClick={handleNotificationClick} className="relative" >
               <IoNotifications size={25} />
               {unreadCount > 0 && (
                 <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold px-[6px] py-[1px] rounded-full">
@@ -116,9 +119,9 @@ const Navbar = () => {
                 <div className="p-3 border-b font-bold">Notifications</div>
                 <ul className="max-h-60 overflow-y-auto">
                   {notifications.length > 0 ? (
-                    notifications.slice(0, 5).map((notif) => (
+                    notifications.slice(0, 5).map((notif,idx) => (
                       <li
-                        key={notif.id}
+                        key={idx}
                         className="p-2 border-b hover:bg-gray-200 cursor-pointer"
                       >
                         {`Transaction ID: ${notif.transactionId} - Amount: ${notif.transactionAmount}৳  Type: ${notif.transactionType}`}

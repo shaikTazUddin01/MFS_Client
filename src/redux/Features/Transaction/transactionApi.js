@@ -34,6 +34,14 @@ export const transactionApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["transaction"],
     }),
+    readNotification: builder.mutation({
+      query: (data) => ({
+        url: "/transaction/readNotifi",
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["transaction"],
+    }),
 
     getTransaction: builder.query({
       query: () => {
@@ -60,5 +68,6 @@ export const {
   useSendMoneyMutation,
   useCashOutMutation,
   useCashInMutation,
-  useAddMoneyMutation
+  useAddMoneyMutation,
+  useReadNotificationMutation
 } = transactionApi;

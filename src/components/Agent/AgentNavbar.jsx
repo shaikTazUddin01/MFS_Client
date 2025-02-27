@@ -7,7 +7,10 @@ import { useNavigate } from "react-router-dom";
 import { Drawer } from "antd";
 import { IoCloseSharp, IoNotifications } from "react-icons/io5";
 import { HiMenuAlt1 } from "react-icons/hi";
-import { useGetUserTransactionQuery } from "../../redux/Features/Transaction/transactionApi";
+import {
+  useGetUserTransactionQuery,
+  useReadNotificationMutation,
+} from "../../redux/Features/Transaction/transactionApi";
 
 const AgentNavbar = () => {
   const currentUser = useUser();
@@ -22,10 +25,12 @@ const AgentNavbar = () => {
   const { data: transactionData, isLoading } = useGetUserTransactionQuery({
     number: user?.number,
   });
-
+  const [readNotificationStatus] = useReadNotificationMutation();
   const notifications = transactionData?.data || [];
 
-  const unreadCount = notifications.filter((notif) => !notif.read).length;
+  const unreadCount = notifications.filter(
+    (notif) => notif.isRead === false
+  ).length;
 
   const showDrawer = () => setOpen(true);
   const onClose = () => setOpen(false);
@@ -37,8 +42,10 @@ const AgentNavbar = () => {
     navigate("/login");
   };
 
-  const handleNotificationClick = () => {
+  const handleNotificationClick = async () => {
     setIsDropdownOpen(!isDropdownOpen);
+
+    await readNotificationStatus({ number: user?.number, isRead: true });
   };
 
   return (
@@ -59,19 +66,22 @@ const AgentNavbar = () => {
               <IoCloseSharp />
             </button>
             <div className="text-center mb-4">
-              <a href="/agent" className="font-bold text-2xl hover:text-blue-600">
+              <a
+                href="/agent"
+                className="font-bold text-2xl hover:text-blue-600"
+              >
                 FinanceFlow
               </a>
             </div>
             <ul className="space-y-2 text-center font-semibold flex flex-col justify-between h-[80vh]">
-                <div className="">
-              <li>
-                <a href="/agent">Home</a>
-              </li>
-              <li>
-                <a href="/agent/allNotification">All Notification</a>
-              </li>
-                </div>
+              <div className="">
+                <li>
+                  <a href="/agent">Home</a>
+                </li>
+                <li>
+                  <a href="/agent/allNotification">All Notification</a>
+                </li>
+              </div>
               <li
                 className=" bg-blue-600 hover:bg-blue-700 py-1 px-1 rounded cursor-pointer text-white"
                 onClick={handleLogOut}
@@ -118,9 +128,9 @@ const AgentNavbar = () => {
                 <div className="p-3 border-b font-bold">Notifications</div>
                 <ul className="max-h-60 overflow-y-auto">
                   {notifications.length > 0 ? (
-                    notifications.slice(0, 5).map((notif) => (
+                    notifications.slice(0, 5).map((notif, idx) => (
                       <li
-                        key={notif.id}
+                        key={idx}
                         className="p-2 border-b hover:bg-gray-200 cursor-pointer"
                       >
                         {`Transaction ID: ${notif.transactionId} - Amount: ${notif.transactionAmount}৳  Type: ${notif.transactionType}`}
