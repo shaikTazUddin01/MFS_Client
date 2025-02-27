@@ -7,7 +7,7 @@ const CashInRequest = () => {
 
   const requests = data?.data?.map((request) => ({
     key: request._id,
-    agentId:request?.agentId?._id,
+    agentId: request?.agentId?._id,
     userName: request?.agentId?.name || "Unknown",
     userEmail: request?.agentId?.email || "N/A",
     amount: `100000 ৳`,
@@ -31,15 +31,17 @@ const CashInRequest = () => {
       key: "amount",
     },
     {
-        title: "Action",
-        key: "action",
-        render: (item) => <RechargeRequest item={item} />,
-      },
+      title: "Action",
+      key: "action",
+      render: (item) => <RechargeRequest item={item} />,
+    },
   ];
 
   return (
     <div>
-      <h1 className="text-3xl font-semibold text-center mb-5">Cash-In Requests</h1>
+      <h1 className="text-3xl font-semibold text-center mb-5">
+        Agent Recharge Requests
+      </h1>
       <Table
         loading={isLoading}
         columns={columns}

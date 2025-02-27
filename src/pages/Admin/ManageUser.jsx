@@ -29,7 +29,9 @@ const ManageUser = () => {
       render: (text, record) => (
         <span
           className="text-blue-600 cursor-pointer hover:underline"
-          onClick={() => navigate(`/admin/transactions/${Number(record.userPhone)}`)}
+          onClick={() =>
+            navigate(`/admin/transactions/${Number(record.userPhone)}`)
+          }
         >
           {text}
         </span>
@@ -60,7 +62,11 @@ const ManageUser = () => {
       dataIndex: "status",
       key: "status",
       render: (status) => (
-        <span className={`${status === "Active" ? "text-green-600" : "text-red-600"} font-semibold`}>
+        <span
+          className={`${
+            status === "Active" ? "text-green-600" : "text-red-600"
+          } font-semibold`}
+        >
           {status}
         </span>
       ),

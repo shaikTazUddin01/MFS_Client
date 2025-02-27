@@ -120,7 +120,7 @@ const Registration = () => {
             </div>
           </MSForm>
           <p className="-mt-4">
-            I have an accout{" "}
+            Have an account{" "}
             <a className="text-blue-800 hover:text-blue-700" href={"/login"}>
               LogIn
             </a>

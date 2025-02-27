@@ -1,8 +1,6 @@
-import { Table } from "antd";;
+import { Table } from "antd";
 import { useGetUserQuery } from "../../redux/Features/Auth/authApi";
 import AgentRequest from "../../components/Admin/AgentRequest";
-
-
 
 const ManageAgentRequest = () => {
   const { data: userData, isLoading } = useGetUserQuery({
@@ -76,7 +74,7 @@ const ManageAgentRequest = () => {
   return (
     <div>
       <h1 className="text-3xl font-semibold text-center mb-5">
-        Manage Agent Request
+        Manage Agent Requests
       </h1>
       <Table
         loading={isLoading}

@@ -131,7 +131,7 @@ const Login = () => {
             </div>
           </MSForm>
           <p>
-            I Don&#39;t have an accout.?{" "}
+            Don&#39;t have an account.?{" "}
             <a
               className="text-blue-800 hover:text-blue-700"
               href={"/registration"}

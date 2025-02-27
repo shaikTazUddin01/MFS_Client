@@ -86,7 +86,7 @@ const VerifyAgent = () => {
   return (
     <div >
       <h1 className="text-3xl font-semibold text-center mb-5">
-        Verified Agent
+        Verified Agents
       </h1>
       <Table
         loading={isLoading}

@@ -28,7 +28,7 @@ const AgentHome = () => {
   const cardData = [
     {
       title: "Balance Inquiry",
-      icon: "📊",
+      icon: "🔍",
       balance: userData?.data?.balance,
       action: toggleBalanceVisibility,
     },
