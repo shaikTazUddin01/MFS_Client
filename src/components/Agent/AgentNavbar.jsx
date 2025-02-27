@@ -68,9 +68,10 @@ const AgentNavbar = () => {
             <div className="text-center mb-4">
               <a
                 href="/agent"
-                className="font-bold text-2xl hover:text-blue-600"
+                className="font-bold text-2xl"
               >
-                FinanceFlow
+                <span className="text-[#0f84b3] text-[22px]">Finance</span>
+                Flow
               </a>
             </div>
             <ul className="space-y-2 text-center font-semibold flex flex-col justify-between h-[80vh]">
@@ -93,7 +94,8 @@ const AgentNavbar = () => {
 
           {/* Brand Name */}
           <a href="/agent" className="ml-3 text-xl font-bold">
-            FinanceFlow
+          <span className="text-[#14bcff] text-[22px]">Finance</span>
+            Flow
           </a>
         </div>
 
@@ -129,12 +131,13 @@ const AgentNavbar = () => {
                 <ul className="max-h-60 overflow-y-auto">
                   {notifications.length > 0 ? (
                     notifications.slice(0, 5).map((notif, idx) => (
+                      <a href="/agent/allNotification" key={idx}>
                       <li
-                        key={idx}
                         className="p-2 border-b hover:bg-gray-200 cursor-pointer"
                       >
                         {`Transaction ID: ${notif.transactionId} - Amount: ${notif.transactionAmount}৳  Type: ${notif.transactionType}`}
                       </li>
+                      </a>
                     ))
                   ) : (
                     <li className="p-2 text-center text-gray-500">

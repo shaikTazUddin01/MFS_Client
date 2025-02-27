@@ -44,7 +44,7 @@ const AdminLayout = () => {
     },
     {
       key: "2",
-      icon: <UsergroupAddOutlined/>,
+      icon: <UsergroupAddOutlined />,
       label: "Manage User",
       path: "/admin/manageUser",
     },
@@ -89,7 +89,7 @@ const AdminLayout = () => {
       icon: <WalletOutlined />,
       label: "WithDraw Request",
       path: "/admin/withDrawRequest",
-    }
+    },
   ];
 
   const renderMenu = () => (
@@ -139,9 +139,10 @@ const AdminLayout = () => {
         <div className="demo-logo-vertical overflow-hidden" />
         <a
           href="/admin"
-          className="font-bold text-2xl cursor-pointer hover:text-blue-600 text-white flex justify-center items-center pt-4 pb-3"
+          className="font-bold text-2xl cursor-pointer text-white flex justify-center items-center pt-4 pb-3"
         >
-          FinanceFlow 
+          <span className="text-[#12bcff]">Finance</span>
+          Flow
         </a>
         {renderMenu()}
       </Sider>
@@ -154,7 +155,8 @@ const AdminLayout = () => {
       >
         <div className="flex justify-between items-center p-4">
           <a href="/" className="font-bold text-2xl cursor-pointer text-white">
-          FinanceFlow 
+            <span className="text-[#14bcff] ">Finance</span>
+            Flow
           </a>
           <button
             className="text-white text-2xl"

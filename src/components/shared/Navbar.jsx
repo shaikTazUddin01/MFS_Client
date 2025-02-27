@@ -7,7 +7,10 @@ import { useNavigate } from "react-router-dom";
 import { Drawer } from "antd";
 import { IoCloseSharp, IoNotifications } from "react-icons/io5";
 import { HiMenuAlt1 } from "react-icons/hi";
-import { useGetUserTransactionQuery, useReadNotificationMutation } from "../../redux/Features/Transaction/transactionApi";
+import {
+  useGetUserTransactionQuery,
+  useReadNotificationMutation,
+} from "../../redux/Features/Transaction/transactionApi";
 
 const Navbar = () => {
   const currentUser = useUser();
@@ -22,10 +25,12 @@ const Navbar = () => {
   const { data: transactionData, isLoading } = useGetUserTransactionQuery({
     number: user?.number,
   });
-const [readNotificationStatus]=useReadNotificationMutation()
+  const [readNotificationStatus] = useReadNotificationMutation();
   const notifications = transactionData?.data || [];
 
-  const unreadCount = notifications.filter((notif) => notif.isRead===false).length;
+  const unreadCount = notifications.filter(
+    (notif) => notif.isRead === false
+  ).length;
 
   const showDrawer = () => setOpen(true);
   const onClose = () => setOpen(false);
@@ -37,11 +42,10 @@ const [readNotificationStatus]=useReadNotificationMutation()
     navigate("/login");
   };
 
-  const handleNotificationClick = async() => {
+  const handleNotificationClick = async () => {
     setIsDropdownOpen(!isDropdownOpen);
 
-  await readNotificationStatus({number:user?.number,isRead:true})
-
+    await readNotificationStatus({ number: user?.number, isRead: true });
   };
 
   return (
@@ -62,8 +66,9 @@ const [readNotificationStatus]=useReadNotificationMutation()
               <IoCloseSharp />
             </button>
             <div className="text-center mb-4">
-              <a href="/" className="font-bold text-2xl hover:text-blue-600">
-                FinanceFlow
+              <a href="/" className="ml-3 text-xl font-bold">
+                <span className="text-[#0f84b3] text-[22px]">Finance</span>
+                Flow
               </a>
             </div>
             <ul className="space-y-2 text-center font-semibold flex flex-col justify-between h-[80vh]">
@@ -84,7 +89,8 @@ const [readNotificationStatus]=useReadNotificationMutation()
             </ul>
           </Drawer>
           <a href="/" className="ml-3 text-xl font-bold">
-            FinanceFlow
+            <span className="text-[#14bcff] text-[22px]">Finance</span>
+            Flow
           </a>
         </div>
 
@@ -104,7 +110,7 @@ const [readNotificationStatus]=useReadNotificationMutation()
         <div className="relative flex items-center gap-5">
           {/* Notification Icon */}
           <div className="relative">
-            <button onClick={handleNotificationClick} className="relative" >
+            <button onClick={handleNotificationClick} className="relative">
               <IoNotifications size={25} />
               {unreadCount > 0 && (
                 <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold px-[6px] py-[1px] rounded-full">
@@ -119,13 +125,12 @@ const [readNotificationStatus]=useReadNotificationMutation()
                 <div className="p-3 border-b font-bold">Notifications</div>
                 <ul className="max-h-60 overflow-y-auto">
                   {notifications.length > 0 ? (
-                    notifications.slice(0, 5).map((notif,idx) => (
-                      <li
-                        key={idx}
-                        className="p-2 border-b hover:bg-gray-200 cursor-pointer"
-                      >
-                        {`Transaction ID: ${notif.transactionId} - Amount: ${notif.transactionAmount}৳  Type: ${notif.transactionType}`}
-                      </li>
+                    notifications.slice(0, 5).map((notif, idx) => (
+                      <a href="/allNotification" key={idx}>
+                        <li className="p-2 border-b hover:bg-gray-200 cursor-pointer">
+                          {`Transaction ID: ${notif.transactionId} - Amount: ${notif.transactionAmount}৳  Type: ${notif.transactionType}`}
+                        </li>
+                      </a>
                     ))
                   ) : (
                     <li className="p-2 text-center text-gray-500">
