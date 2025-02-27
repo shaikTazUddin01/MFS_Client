@@ -50,13 +50,7 @@ const ManageAgentRequest = () => {
       dataIndex: "status",
       key: "status",
       render: (item) => (
-        <div
-          className={`${
-            item === "Active" ? "text-green-600" : "text-red-600"
-          } font-semibold`}
-        >
-          {item}
-        </div>
+        <div className="text-yellow-600 font-semibold">{item}</div>
       ),
     },
     {

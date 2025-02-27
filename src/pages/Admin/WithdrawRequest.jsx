@@ -12,6 +12,7 @@ const WithdrawRequest = () => {
     key: request._id,
     agentId:request?.agentId?._id,
     userName: request?.agentId?.name || "Unknown",
+    number: `0${request?.agentId?.number} `,
     userEmail: request?.agentId?.email || "N/A",
     amount: request?.amount,
     status: request.status,
@@ -19,14 +20,19 @@ const WithdrawRequest = () => {
 
   const columns = [
     {
-      title: "User Name",
+      title: "Agent Name",
       dataIndex: "userName",
       key: "userName",
     },
     {
-      title: "User Email",
+      title: "Agent Email",
       dataIndex: "userEmail",
       key: "userEmail",
+    },
+    {
+      title: "Agent Number",
+      dataIndex: "number",
+      key: "number",
     },
     {
       title: "Amount",

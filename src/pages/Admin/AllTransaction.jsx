@@ -7,8 +7,8 @@ const AllTransaction = () => {
   const transactions = data?.data?.map((transaction) => ({
     key: transaction._id,
     transactionId: transaction.transactionId,
-    sender: transaction.senderNumber,
-    receiver: transaction.receiverNumber,
+    sender: `0${transaction.senderNumber}`,
+    receiver: `0${transaction.receiverNumber}`,
     amount: `${transaction.transactionAmount}৳`,
     type: transaction.transactionType,
     date: new Date(transaction.createdAt).toLocaleString(),

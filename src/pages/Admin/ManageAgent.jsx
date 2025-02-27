@@ -98,7 +98,7 @@ const ManageAgent = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-semibold text-center mb-5">Manage Agents</h1>
+      <h1 className="text-3xl font-semibold text-center mb-5">Manage Agent</h1>
       <Table
         loading={isLoading}
         columns={columns}
